@@ -72,6 +72,8 @@
 		EB049412208DE000005CCE38 /* FirstScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB04940C208DDFF5005CCE38 /* FirstScene.cpp */; };
 		EB04941B208F3914005CCE38 /* BackgroundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB049418208F3914005CCE38 /* BackgroundLayer.cpp */; };
 		EB04941C208F3914005CCE38 /* BackgroundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB049418208F3914005CCE38 /* BackgroundLayer.cpp */; };
+		EB7EF6522091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7EF6502091D5B00011D2C3 /* MosquitomLayer.cpp */; };
+		EB7EF6532091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7EF6502091D5B00011D2C3 /* MosquitomLayer.cpp */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
 /* End PBXBuildFile section */
@@ -177,6 +179,8 @@
 		EB04940C208DDFF5005CCE38 /* FirstScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FirstScene.cpp; sourceTree = "<group>"; };
 		EB049418208F3914005CCE38 /* BackgroundLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BackgroundLayer.cpp; sourceTree = "<group>"; };
 		EB04941A208F3914005CCE38 /* BackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundLayer.h; sourceTree = "<group>"; };
+		EB7EF6502091D5B00011D2C3 /* MosquitomLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MosquitomLayer.cpp; sourceTree = "<group>"; };
+		EB7EF6512091D5B00011D2C3 /* MosquitomLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MosquitomLayer.hpp; sourceTree = "<group>"; };
 		EBD90CCD2090233A00E1AA05 /* FirstScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstScene.h; sourceTree = "<group>"; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -325,6 +329,8 @@
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				EB04940C208DDFF5005CCE38 /* FirstScene.cpp */,
+				EB7EF6502091D5B00011D2C3 /* MosquitomLayer.cpp */,
+				EB7EF6512091D5B00011D2C3 /* MosquitomLayer.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -423,6 +429,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = K5XND7W847;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TestGame" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -531,6 +542,7 @@
 				EB04941B208F3914005CCE38 /* BackgroundLayer.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				EB7EF6522091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */,
 				EB04940E208DDFF5005CCE38 /* FirstScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7EF6532091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				EB049412208DE000005CCE38 /* FirstScene.cpp in Sources */,
 				EB04941C208F3914005CCE38 /* BackgroundLayer.cpp in Sources */,
@@ -569,6 +582,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = K5XND7W847;
 				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -602,6 +616,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = K5XND7W847;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

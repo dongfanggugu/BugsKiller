@@ -7,9 +7,11 @@
 
 #include "FirstScene.h"
 #include "BackgroundLayer.h"
+#include "MosquitomLayer.hpp"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
+using namespace cocos2d::ui;
 
 Scene* FirstScene::createScene()
 {
@@ -18,6 +20,11 @@ Scene* FirstScene::createScene()
 
 bool FirstScene::init()
 {
+    if (!Scene::init())
+    {
+        return false;
+    }
+    this->scheduleUpdate();
     auto layer = BackgroundLayer::create();
     this->addChild(layer);
     //LayerColor *bgColor = LayerColor::create(Color4B(255, 255, 255, 255));
@@ -30,25 +37,62 @@ bool FirstScene::init()
     this->addCloseBtn();
     this->addSprite();
     this->addRightBtn();
+    this->addFireBtn();
+    this->addBugsLayer();
     return true;
 }
 
 Size winSize();
 
+void FirstScene::addBugsLayer()
+{
+    auto layer = MosquitomLayer::create();
+    layer->setContentSize(Size(winSize().width, winSize().height));
+    this->addChild(layer);
+    this->mosSprite = layer->sprite;
+}
+
 void FirstScene::addRightBtn()
 {
     auto btn = this->genBtn("right ->", "res/button.png", CC_CALLBACK_1(FirstScene::moveRight, this));
     btn->setContentSize(Size(80, 30));
-    btn->setPosition(Vec2(winSize().width / 2 + 40 + 8, winSize().height - 8 - 15));
+    btn->setPosition(Vec2(winSize().width - 40 - 8, winSize().height - 15 - 50));
     this->addChild(btn);
 }
 
 void FirstScene::moveRight(Ref *sender)
 {
-    loadPackageImage();
     MoveBy * moveBy;
-    moveBy = MoveBy::create(0.2, Vec2(10, 0));
+    moveBy = MoveBy::create(0.2, Vec2(5, 0));
     this->sprite->runAction(moveBy);
+}
+
+void FirstScene::addFireBtn()
+{
+    auto btn = this->genBtn("FIRE", "res/button_fire.png", CC_CALLBACK_1(FirstScene::fireArrow, this));
+    btn->setContentSize(Size(30, 30));
+    btn->setPosition(Vec2(winSize().width - 100, winSize().height / 2));
+    this->addChild(btn);
+}
+
+void FirstScene::fireArrow(Ref *sender)
+{
+    auto pos = this->sprite->getPosition();
+    auto size = this->sprite->getContentSize();
+    auto moveTo = MoveTo::create(0.5, Vec2(pos.x, winSize().height + size.height));
+    this->sprite->runAction(moveTo);
+}
+
+void FirstScene::update(float delta)
+{
+    this->checkCollison();
+    auto pos = this->sprite->getPosition();
+    auto size = this->sprite->getContentSize();
+    if ((pos.y + size.height) > winSize().height)
+    {
+        this->sprite->stopAllActions();
+        this->sprite->setPosition(Vec2(winSize().width / 2, 15));
+    }
 }
 
 Size winSize()
@@ -57,7 +101,7 @@ Size winSize()
     return direct->getWinSize();
 }
 
-cocos2d::ui::Button* FirstScene::genBtn(const std::string &title,
+Button* FirstScene::genBtn(const std::string &title,
                                         const std::string &icon,
                                         const cocos2d::ui::Button::ccWidgetClickCallback &callback)
 {
@@ -78,27 +122,27 @@ void close(Ref *sender)
 {
     auto director = Director::getInstance();
     director->end();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
 }
 
 void FirstScene::addCloseBtn()
 {
     auto btn = this->genBtn("", "CloseNormal.png", &close);
-    btn->setContentSize(Size(80, 20));
-    btn->setPosition(Vec2(winSize().width - 80, winSize().height -20));
+    btn->setContentSize(Size(30, 30));
+    btn->setPosition(Vec2(winSize().width - 15, winSize().height - 15));
     this->addChild(btn);
 }
-
 
 void FirstScene::addSprite()
 {
     this->sprite = Sprite::create();
-    sprite->setAnchorPoint(Vec2(0, 0));
-    this->sprite->setTexture("res/a1.png");
-    this->sprite->setPosition(Vec2(0, 0));
-    this->setContentSize(Size(40, 40));
+    this->sprite->setTexture("res/arrow.png");
+    this->sprite->setPosition(Vec2(winSize().width / 2, 15));
+    this->setContentSize(Size(30, 30));
     this->sprite->setScale(1);
     this->addChild(this->sprite);
-    this->loadPackageImage();
 
 //    auto animation = Animation::create();
 //
@@ -141,6 +185,13 @@ void FirstScene::move1(Ref *sender)
     this->sprite->runAction(moveTo);
 }
 
+void FirstScene::checkCollison()
+{
+    if (this->sprite->getBoundingBox().intersectsRect(this->mosSprite->getBoundingBox()))
+    {
+        this->mosSprite->setTexture("res/bang.png");
+    }
+}
 
 FirstScene::~FirstScene()
 {

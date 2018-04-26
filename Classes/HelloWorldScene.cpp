@@ -94,25 +94,10 @@ bool HelloWorld::init()
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
-    this->addBtn();
     this->keyboardTest();
     
     return true;
 }
-
-void HelloWorld::addBtn()
-{
-    auto btn = cocos2d::ui::Button::create();
-    btn->setTitleText("Start");
-    btn->setColor(Color3B::RED);
-    btn->setOpacity(100);
-    btn->setPosition(Vec2(400, 100));
-    auto direct = Director::getInstance();
-    direct->getWinSize();
-    btn->addClickEventListener(std::bind(&HelloWorld::clickBtn, this, std::placeholders::_1));
-    this->addChild(btn);
-}
-
 
 void HelloWorld::addTouchEvent(cocos2d::Sprite *sprite)
 {
@@ -126,7 +111,8 @@ void HelloWorld::addTouchEvent(cocos2d::Sprite *sprite)
         auto rect = Rect(pos.x - size.width / 2, pos.y - size.height / 2, size.width, size.height);
         if (rect.containsPoint(touchPos))
         {
-            this->clickBtn(nullptr);
+            auto director = Director::getInstance();
+            director->pushScene(FirstScene::createScene());
             return  true;
         }
 
@@ -168,14 +154,6 @@ void HelloWorld::keyboardTest()
 //{
 //    log("key %d released", keyCode);
 //}
-
-void HelloWorld::clickBtn(Ref *sender)
-{
-    log("click btn");
-    auto director = Director::getInstance();
-	director->pushScene(FirstScene::createScene());
-}
-
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
     //Close the cocos2d-x game scene and quit the application

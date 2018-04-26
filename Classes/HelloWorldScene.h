@@ -18,9 +18,6 @@ public:
     CREATE_FUNC(HelloWorld);
     
 private:
-    
-    void addBtn();
-    void clickBtn(cocos2d::Ref *sender);
     void keyboardTest();
     void addTouchEvent(cocos2d::Sprite *sprite);
 };
