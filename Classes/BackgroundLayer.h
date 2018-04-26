@@ -11,7 +11,6 @@ public:
     virtual bool init();
     CREATE_FUNC(BackgroundLayer);
    
-
      static int currentBgImageIndex;
      cocos2d::ui::Scale9Sprite* createBackground(cocos2d::Vec2 pos);
      static int rollTime;

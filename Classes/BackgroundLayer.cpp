@@ -8,6 +8,8 @@ USING_NS_CC_EXT;
 
 int BackgroundLayer::rollTime = DEF_ROLL_SPEED;
 
+#define winSize Director::getInstance()->getWinSize()
+
 
 bool BackgroundLayer::init()
 {
@@ -15,8 +17,7 @@ bool BackgroundLayer::init()
     {
         return false;
     }
-//    startRollbg();
-    createBackground(Vec2::ZERO);
+    createBackground(Vec2(winSize.width / 2, winSize.height / 2));
     return true;
 }
 
@@ -24,18 +25,15 @@ Scale9Sprite* BackgroundLayer::createBackground(Vec2 pos)
 {
     auto background = Scale9Sprite::create("res/background.PNG");
     background->setScale9Enabled(true);
-    auto winSize = Director::getInstance()->getWinSize();
-    background->setContentSize(winSize);
+    background->setContentSize(Size(winSize.width - 200, winSize.height));
     background->setPosition(pos);
-    background->setAnchorPoint(Vec2::ZERO);
     this->addChild(background);
     return background;
 }
 
 void BackgroundLayer::startRollbg()
 {
-    auto winSize = Director::getInstance()->getWinSize();
-    auto bg = createBackground(Vec2::ZERO);
+   /* auto bg = createBackground(Vec2::ZERO);
     auto bg2 = createBackground(Vec2(0, winSize.height));
 
     auto mt = MoveBy::create(rollTime, Vec2(0, -winSize.height));
@@ -48,7 +46,7 @@ void BackgroundLayer::startRollbg()
         bg->setPositionY(0);
         bg2->setPositionY(winSize.height);
     })));
-    this->runAction(rf);
+    this->runAction(rf);*/
 }
 
 void BackgroundLayer::stop()

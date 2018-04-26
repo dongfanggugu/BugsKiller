@@ -13,6 +13,8 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace cocos2d::ui;
 
+Size winSize();
+
 Scene* FirstScene::createScene()
 {
     return FirstScene::create();
@@ -26,6 +28,8 @@ bool FirstScene::init()
     }
     this->scheduleUpdate();
     auto layer = BackgroundLayer::create();
+    layer->setPosition(Vec2::ZERO);
+    layer->setContentSize(Size(winSize().width - 200, winSize().height));
     this->addChild(layer);
     //LayerColor *bgColor = LayerColor::create(Color4B(255, 255, 255, 255));
     //bgColor->setContentSize(Size(1000, 760));
@@ -42,7 +46,6 @@ bool FirstScene::init()
     return true;
 }
 
-Size winSize();
 
 void FirstScene::addBugsLayer()
 {
