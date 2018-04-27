@@ -8,6 +8,7 @@
 #include "FirstScene.h"
 #include "BackgroundLayer.h"
 #include "MosquitomLayer.hpp"
+#include "./OperationLayer/LeftSideOperationLayer.hpp"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -33,6 +34,7 @@ bool FirstScene::init()
     this->addRightBtn();
     this->addFireBtn();
     this->addBugsLayer();
+    this->addLeftOperationLayer();
     return true;
 }
 
@@ -184,6 +186,12 @@ void FirstScene::checkCollison()
     {
         this->mosSprite->setTexture("res/bang.png");
     }
+}
+
+void FirstScene::addLeftOperationLayer()
+{
+    auto layer = LeftSideOperationLayer::create();
+    this->addChild(layer);
 }
 
 FirstScene::~FirstScene()

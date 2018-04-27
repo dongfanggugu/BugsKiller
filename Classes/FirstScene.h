@@ -41,6 +41,7 @@ private:
     void addBugsLayer();
     void checkCollison();
     void addBackgroundLayer();
+    void addLeftOperationLayer();
 };
 
 #endif /* FirstScene_hpp */

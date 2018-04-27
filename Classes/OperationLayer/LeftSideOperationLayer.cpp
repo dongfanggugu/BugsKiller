@@ -10,11 +10,40 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
+#define winSize Director::getInstance()->getWinSize()
+
 bool LeftSideOperationLayer::init()
 {
     if (!Layer::init())
     {
         return false;
     }
+    this->setContentSize(Size(200, winSize.height));
+    this->addTouchListener();
     return true;
+}
+
+void LeftSideOperationLayer::addTouchListener()
+{
+    auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->onTouchBegan = [](Touch *touch, Event *event)
+    {
+        auto pos = touch->getLocation();
+        log("begin");
+
+        return true;
+    };
+
+    touchListener->onTouchMoved = [](Touch *touch, Event *event)
+    {
+        auto pos = touch->getLocation();
+        log("x: %f, y: %f", pos.x, pos.y);
+    };
+
+    touchListener->onTouchEnded = [](Touch *touch, Event *event)
+    {
+        auto pos = touch->getLocation();
+        log("end");
+    };
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
