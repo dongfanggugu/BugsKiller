@@ -13,7 +13,7 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace cocos2d::ui;
 
-Size winSize();
+#define winSize Director::getInstance()->getWinSize()
 
 Scene* FirstScene::createScene()
 {
@@ -27,17 +27,7 @@ bool FirstScene::init()
         return false;
     }
     this->scheduleUpdate();
-    auto layer = BackgroundLayer::create();
-    layer->setPosition(Vec2::ZERO);
-    layer->setContentSize(Size(winSize().width - 200, winSize().height));
-    this->addChild(layer);
-    //LayerColor *bgColor = LayerColor::create(Color4B(255, 255, 255, 255));
-    //bgColor->setContentSize(Size(1000, 760));
-    //bgColor->setPosition(0, 0);
-    //bgColor->setAnchorPoint(Vec2(0, 0));
-
-    //this->addChild(bgColor);
-
+    this->addBackgroundLayer();
     this->addCloseBtn();
     this->addSprite();
     this->addRightBtn();
@@ -46,11 +36,10 @@ bool FirstScene::init()
     return true;
 }
 
-
 void FirstScene::addBugsLayer()
 {
     auto layer = MosquitomLayer::create();
-    layer->setContentSize(Size(winSize().width, winSize().height));
+    layer->setPosition(Vec2(100, 0));
     this->addChild(layer);
     this->mosSprite = layer->sprite;
 }
@@ -59,7 +48,7 @@ void FirstScene::addRightBtn()
 {
     auto btn = this->genBtn("right ->", "res/button.png", CC_CALLBACK_1(FirstScene::moveRight, this));
     btn->setContentSize(Size(80, 30));
-    btn->setPosition(Vec2(winSize().width - 40 - 8, winSize().height - 15 - 50));
+    btn->setPosition(Vec2(winSize.width - 40 - 8, winSize.height - 15 - 50));
     this->addChild(btn);
 }
 
@@ -74,7 +63,7 @@ void FirstScene::addFireBtn()
 {
     auto btn = this->genBtn("FIRE", "res/button_fire.png", CC_CALLBACK_1(FirstScene::fireArrow, this));
     btn->setContentSize(Size(30, 30));
-    btn->setPosition(Vec2(winSize().width - 100, winSize().height / 2));
+    btn->setPosition(Vec2(winSize.width - 100, winSize.height / 2));
     this->addChild(btn);
 }
 
@@ -82,7 +71,7 @@ void FirstScene::fireArrow(Ref *sender)
 {
     auto pos = this->sprite->getPosition();
     auto size = this->sprite->getContentSize();
-    auto moveTo = MoveTo::create(0.5, Vec2(pos.x, winSize().height + size.height));
+    auto moveTo = MoveTo::create(0.5, Vec2(pos.x, winSize.height + size.height));
     this->sprite->runAction(moveTo);
 }
 
@@ -91,17 +80,11 @@ void FirstScene::update(float delta)
     this->checkCollison();
     auto pos = this->sprite->getPosition();
     auto size = this->sprite->getContentSize();
-    if ((pos.y + size.height) > winSize().height)
+    if ((pos.y + size.height) > winSize.height)
     {
         this->sprite->stopAllActions();
-        this->sprite->setPosition(Vec2(winSize().width / 2, 15));
+        this->sprite->setPosition(Vec2(winSize.width / 2, 15));
     }
-}
-
-Size winSize()
-{
-    auto direct = Director::getInstance();
-    return direct->getWinSize();
 }
 
 Button* FirstScene::genBtn(const std::string &title,
@@ -134,7 +117,7 @@ void FirstScene::addCloseBtn()
 {
     auto btn = this->genBtn("", "CloseNormal.png", &close);
     btn->setContentSize(Size(30, 30));
-    btn->setPosition(Vec2(winSize().width - 15, winSize().height - 15));
+    btn->setPosition(Vec2(winSize.width - 15, winSize.height - 15));
     this->addChild(btn);
 }
 
@@ -142,7 +125,7 @@ void FirstScene::addSprite()
 {
     this->sprite = Sprite::create();
     this->sprite->setTexture("res/arrow.png");
-    this->sprite->setPosition(Vec2(winSize().width / 2, 15));
+    this->sprite->setPosition(Vec2(winSize.width / 2, 15));
     this->setContentSize(Size(30, 30));
     this->sprite->setScale(1);
     this->addChild(this->sprite);
@@ -158,6 +141,13 @@ void FirstScene::addSprite()
 //    animation->setLoops(-1);
 //    auto animate = Animate::create(animation);
 //    sprite->runAction(animate);
+}
+
+void FirstScene::addBackgroundLayer()
+{
+    auto layer = BackgroundLayer::create();
+    layer->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
+    this->addChild(layer);
 }
 
 void FirstScene::loadPackageImage()

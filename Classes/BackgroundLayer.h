@@ -10,9 +10,10 @@ class BackgroundLayer : public cocos2d::Layer
 public:
     virtual bool init();
     CREATE_FUNC(BackgroundLayer);
+    virtual ~BackgroundLayer();
    
      static int currentBgImageIndex;
-     cocos2d::ui::Scale9Sprite* createBackground(cocos2d::Vec2 pos);
+     void addBackground();
      static int rollTime;
      void startRollbg();
      void stop();

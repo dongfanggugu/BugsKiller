@@ -10,25 +10,26 @@ int BackgroundLayer::rollTime = DEF_ROLL_SPEED;
 
 #define winSize Director::getInstance()->getWinSize()
 
-
 bool BackgroundLayer::init()
 {
     if (!Layer::init())
     {
         return false;
     }
-    createBackground(Vec2(winSize.width / 2, winSize.height / 2));
+    this->setContentSize(Size(winSize.width - 200, winSize.height));
+    this->setAnchorPoint(Vec2(0.5, 0.5));
+    this->addBackground();
     return true;
 }
 
-Scale9Sprite* BackgroundLayer::createBackground(Vec2 pos)
+void BackgroundLayer::addBackground()
 {
+    auto aa = getAnchorPoint();
     auto background = Scale9Sprite::create("res/background.PNG");
     background->setScale9Enabled(true);
-    background->setContentSize(Size(winSize.width - 200, winSize.height));
-    background->setPosition(pos);
+    background->setContentSize(this->getContentSize());
+    background->setPosition(Vec2::ZERO);
     this->addChild(background);
-    return background;
 }
 
 void BackgroundLayer::startRollbg()
@@ -52,4 +53,9 @@ void BackgroundLayer::startRollbg()
 void BackgroundLayer::stop()
 {
     this->stopAllActions();
+}
+
+BackgroundLayer::~BackgroundLayer()
+{
+    log("backgroundlayer dealloc");
 }

@@ -17,6 +17,7 @@ bool MosquitomLayer::init()
     {
         return false;
     }
+    this->setContentSize(Size(winSize.width - 200, winSize.height));
     scheduleUpdate();
     addSprite();
     return true;
@@ -24,6 +25,7 @@ bool MosquitomLayer::init()
 
 void MosquitomLayer::addSprite()
 {
+    auto size = getContentSize();
     sprite = Sprite::create("res/mosquitom.png");
     sprite->setContentSize(Size(40, 40));
     sprite->setPosition(Vec2(-20, winSize.height - 40));
@@ -33,6 +35,7 @@ void MosquitomLayer::addSprite()
 
 void MosquitomLayer::update(float delta)
 {
+    auto sizeThis = this->getContentSize();
     auto pos = this->sprite->getPosition();
     auto size = this->sprite->getContentSize();
     if (Right == this->towards)
@@ -44,7 +47,8 @@ void MosquitomLayer::update(float delta)
         this->sprite->setPosition(Vec2(pos.x - SPEED * delta, pos.y));
     }
     
-    if (pos.x > winSize.width + size.width / 2)
+
+    if (pos.x > sizeThis.width + size.width / 2)
     {
         this->sprite->setScale(-1, 1);
         this->towards = Left;
@@ -52,7 +56,7 @@ void MosquitomLayer::update(float delta)
     
     if (pos.x < -size.width / 2)
     {
-        this->sprite->setScale(-1, 1);
+        this->sprite->setScale(1, 1);
         this->towards = Right;
     }
 }

@@ -40,6 +40,7 @@ private:
     void fireArrow(Ref *sender);
     void addBugsLayer();
     void checkCollison();
+    void addBackgroundLayer();
 };
 
 #endif /* FirstScene_hpp */
