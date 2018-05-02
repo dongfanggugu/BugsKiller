@@ -8,13 +8,13 @@
 #include "FirstScene.h"
 #include "BackgroundLayer.h"
 #include "MosquitomLayer.hpp"
-#include "./OperationLayer/LeftSideOperationLayer.hpp"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace cocos2d::ui;
 
 #define winSize Director::getInstance()->getWinSize()
+#define ArrowInitY 15
 
 Scene* FirstScene::createScene()
 {
@@ -127,7 +127,7 @@ void FirstScene::addSprite()
 {
     this->sprite = Sprite::create();
     this->sprite->setTexture("res/arrow.png");
-    this->sprite->setPosition(Vec2(winSize.width / 2, 15));
+    this->sprite->setPosition(Vec2(winSize.width / 2, ArrowInitY));
     this->setContentSize(Size(30, 30));
     this->sprite->setScale(1);
     this->addChild(this->sprite);
@@ -191,10 +191,22 @@ void FirstScene::checkCollison()
 void FirstScene::addLeftOperationLayer()
 {
     auto layer = LeftSideOperationLayer::create();
+    layer->moveProtocol = this;
     this->addChild(layer);
 }
 
 FirstScene::~FirstScene()
 {
     log("dealloc");
+}
+
+void FirstScene::onMove(float length)
+{
+    log("zhenhao length: %lf", length);
+    auto pos = this->sprite->getPosition();
+    if (pos.y  != ArrowInitY)
+    {
+        return;
+    }
+    this->sprite->setPosition(200 + length, pos.y);
 }

@@ -326,13 +326,13 @@
 			isa = PBXGroup;
 			children = (
 				EB7EF6562092C0C30011D2C3 /* OperationLayer */,
-				EBD90CCD2090233A00E1AA05 /* FirstScene.h */,
 				EB049418208F3914005CCE38 /* BackgroundLayer.cpp */,
 				EB04941A208F3914005CCE38 /* BackgroundLayer.h */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+				EBD90CCD2090233A00E1AA05 /* FirstScene.h */,
 				EB04940C208DDFF5005CCE38 /* FirstScene.cpp */,
 				EB7EF6502091D5B00011D2C3 /* MosquitomLayer.cpp */,
 				EB7EF6512091D5B00011D2C3 /* MosquitomLayer.hpp */,

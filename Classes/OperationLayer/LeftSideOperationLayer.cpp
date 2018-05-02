@@ -26,17 +26,26 @@ bool LeftSideOperationLayer::init()
 void LeftSideOperationLayer::addTouchListener()
 {
     auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->onTouchBegan = [](Touch *touch, Event *event)
+    touchListener->onTouchBegan = [&](Touch *touch, Event *event)
     {
         auto pos = touch->getLocation();
+        this->startPoint = pos;
         log("begin");
+        if (this->moveProtocol)
+        {
+            this->moveProtocol->onMove(pos.y);
+        }
 
         return true;
     };
 
-    touchListener->onTouchMoved = [](Touch *touch, Event *event)
+    touchListener->onTouchMoved = [&](Touch *touch, Event *event)
     {
         auto pos = touch->getLocation();
+        if (this->moveProtocol)
+        {
+            this->moveProtocol->onMove(pos.y);
+        }
         log("x: %f, y: %f", pos.x, pos.y);
     };
 
@@ -46,4 +55,9 @@ void LeftSideOperationLayer::addTouchListener()
         log("end");
     };
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+}
+
+LeftSideOperationLayer::~LeftSideOperationLayer()
+{
+    delete this->moveProtocol;
 }
