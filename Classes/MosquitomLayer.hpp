@@ -20,10 +20,15 @@ public:
     CREATE_FUNC(MosquitomLayer);
     virtual void update(float delta);
     cocos2d::Sprite* sprite;
+    cocos2d::Rect getBugBoundBoxing();
+    void bugDie();
 private:
     void addSprite();
     void flying();
     Towards towards;
+    
+    void resetBug(float delta);
+    void dismissBug(float delta);
 };
 
 #endif /* MosquitomLayer_hpp */

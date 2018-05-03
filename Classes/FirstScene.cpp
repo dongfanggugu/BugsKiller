@@ -43,7 +43,8 @@ void FirstScene::addBugsLayer()
     auto layer = MosquitomLayer::create();
     layer->setPosition(Vec2(100, 0));
     this->addChild(layer);
-    this->mosSprite = layer->sprite;
+//    this->mosSprite = layer->sprite;
+    this->bugsLayer = layer;
 }
 
 void FirstScene::addRightBtn()
@@ -85,7 +86,7 @@ void FirstScene::update(float delta)
     if ((pos.y + size.height) > winSize.height)
     {
         this->sprite->stopAllActions();
-        this->sprite->setPosition(Vec2(winSize.width / 2, 15));
+        this->sprite->setPosition(Vec2(pos.x, 15));
     }
 }
 
@@ -182,9 +183,13 @@ void FirstScene::move1(Ref *sender)
 
 void FirstScene::checkCollison()
 {
-    if (this->sprite->getBoundingBox().intersectsRect(this->mosSprite->getBoundingBox()))
+    auto rect = this->bugsLayer->getBugBoundBoxing();
+    auto pos = this->bugsLayer->getPosition();
+    auto newRect = Rect(rect.getMinX() + pos.x, rect.getMinY() + pos.y, rect.size.width, rect.size.height);
+    auto arrowRect = this->sprite->getBoundingBox();
+    if (arrowRect.intersectsRect(newRect))
     {
-        this->mosSprite->setTexture("res/bang.png");
+        this->bugsLayer->bugDie();
     }
 }
 
@@ -202,7 +207,6 @@ FirstScene::~FirstScene()
 
 void FirstScene::onMove(float length)
 {
-    log("zhenhao length: %lf", length);
     auto pos = this->sprite->getPosition();
     if (pos.y  != ArrowInitY)
     {

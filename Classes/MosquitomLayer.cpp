@@ -7,6 +7,7 @@
 
 #include "MosquitomLayer.hpp"
 USING_NS_CC;
+using namespace std;
 #define winSize Director::getInstance()->getWinSize()
 #define SPEED 1024 / 5
 
@@ -23,6 +24,7 @@ bool MosquitomLayer::init()
     return true;
 }
 
+
 void MosquitomLayer::addSprite()
 {
     auto size = getContentSize();
@@ -30,6 +32,7 @@ void MosquitomLayer::addSprite()
     sprite->setContentSize(Size(40, 40));
     sprite->setPosition(Vec2(-20, winSize.height - 40));
     this->towards = Right;
+    sprite->retain();
     addChild(sprite);
 }
 
@@ -59,6 +62,35 @@ void MosquitomLayer::update(float delta)
         this->sprite->setScale(1, 1);
         this->towards = Right;
     }
+    
+}
+
+Rect MosquitomLayer::getBugBoundBoxing()
+{
+    return this->sprite->getBoundingBox();
+}
+
+void MosquitomLayer::bugDie()
+{
+    this->sprite->setTexture("res/bang.png");
+    sprite->setContentSize(Size(40, 40));
+    
+    scheduleOnce(schedule_selector(MosquitomLayer::dismissBug), 0.4f);
+    scheduleOnce(schedule_selector(MosquitomLayer::resetBug), 1.0f);
+}
+
+void MosquitomLayer::dismissBug(float delta)
+{
+    this->sprite->removeFromParent();
+}
+
+void MosquitomLayer::resetBug(float delta)
+{
+    this->sprite->setTexture("res/mosquitom.png");
+    sprite->setContentSize(Size(40, 40));
+    sprite->setPosition(Vec2(-20, winSize.height - 40));
+    this->towards = Right;
+    this->addChild(this->sprite);
 }
 
 

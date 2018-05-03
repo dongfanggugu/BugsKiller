@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "LeftSideOperationLayer.hpp"
+#include "MosquitomLayer.hpp"
 
 class FirstScene : public cocos2d::Scene, public LeftSideMoveProtocol
 {
@@ -30,7 +31,8 @@ private:
     void addKeyboardTest();
     void addSprite();
     cocos2d::Sprite *sprite;
-    cocos2d::Sprite* mosSprite;
+    MosquitomLayer *bugsLayer;
+    
     void move1(Ref *sender);
     void loadPackageImage();
     void addCloseBtn();
