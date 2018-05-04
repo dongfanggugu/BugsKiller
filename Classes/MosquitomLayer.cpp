@@ -75,8 +75,8 @@ void MosquitomLayer::bugDie()
     this->sprite->setTexture("res/bang.png");
     sprite->setContentSize(Size(40, 40));
     
-    scheduleOnce(schedule_selector(MosquitomLayer::dismissBug), 0.4f);
-    scheduleOnce(schedule_selector(MosquitomLayer::resetBug), 1.0f);
+    scheduleOnce(schedule_selector(MosquitomLayer::dismissBug), 0.02f);
+    scheduleOnce(schedule_selector(MosquitomLayer::resetBug), 0.5f);
 }
 
 void MosquitomLayer::dismissBug(float delta)
@@ -90,6 +90,7 @@ void MosquitomLayer::resetBug(float delta)
     sprite->setContentSize(Size(40, 40));
     sprite->setPosition(Vec2(-20, winSize.height - 40));
     this->towards = Right;
+    this->sprite->setScale(1, 1);
     this->addChild(this->sprite);
 }
 

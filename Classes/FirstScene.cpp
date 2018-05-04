@@ -14,7 +14,7 @@ USING_NS_CC_EXT;
 using namespace cocos2d::ui;
 
 #define winSize Director::getInstance()->getWinSize()
-#define ArrowInitY 15
+#define ArrowInitY 40
 
 Scene* FirstScene::createScene()
 {
@@ -86,7 +86,7 @@ void FirstScene::update(float delta)
     if ((pos.y + size.height) > winSize.height)
     {
         this->sprite->stopAllActions();
-        this->sprite->setPosition(Vec2(pos.x, 15));
+        this->sprite->setPosition(Vec2(pos.x, 40));
     }
 }
 
@@ -128,9 +128,10 @@ void FirstScene::addSprite()
 {
     this->sprite = Sprite::create();
     this->sprite->setTexture("res/arrow.png");
-    this->sprite->setPosition(Vec2(winSize.width / 2, ArrowInitY));
-    this->setContentSize(Size(30, 30));
-    this->sprite->setScale(1);
+    this->sprite->setContentSize(Size(15, 80));
+    auto size = this->sprite->getContentSize();
+    //this->sprite
+    this->sprite->setPosition(Vec2(winSize.width / 2, 40));
     this->addChild(this->sprite);
 
 //    auto animation = Animation::create();
@@ -208,7 +209,7 @@ FirstScene::~FirstScene()
 void FirstScene::onMove(float length)
 {
     auto pos = this->sprite->getPosition();
-    if (pos.y  != ArrowInitY)
+    if (pos.y != ArrowInitY)
     {
         return;
     }

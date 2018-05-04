@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "cocos2d.h"
 #include "cocos-ext.h"
-#include "LeftSideOperationLayer.hpp"
+#include "./OperationLayer/LeftSideOperationLayer.hpp"
 #include "MosquitomLayer.hpp"
 
 class FirstScene : public cocos2d::Scene, public LeftSideMoveProtocol

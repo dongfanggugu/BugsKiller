@@ -31,9 +31,13 @@ void LeftSideOperationLayer::addTouchListener()
         auto pos = touch->getLocation();
         this->startPoint = pos;
         log("begin");
-        if (this->moveProtocol)
-        {
-            this->moveProtocol->onMove(pos.y);
+        auto target = static_cast<LeftSideOperationLayer *>(event->getCurrentTarget());
+        if (target->getBoundingBox().containsPoint(pos))
+        { 
+            if (this->moveProtocol)
+            {
+                this->moveProtocol->onMove(pos.y);
+            }
         }
 
         return true;
@@ -42,11 +46,15 @@ void LeftSideOperationLayer::addTouchListener()
     touchListener->onTouchMoved = [&](Touch *touch, Event *event)
     {
         auto pos = touch->getLocation();
-        if (this->moveProtocol)
+        auto target = static_cast<LeftSideOperationLayer *>(event->getCurrentTarget());
+        if (target->getBoundingBox().containsPoint(pos))
         {
-            this->moveProtocol->onMove(pos.y);
+            if (this->moveProtocol)
+            {
+                this->moveProtocol->onMove(pos.y);
+            }
+            log("x: %f, y: %f", pos.x, pos.y);
         }
-        log("x: %f, y: %f", pos.x, pos.y);
     };
 
     touchListener->onTouchEnded = [](Touch *touch, Event *event)
@@ -59,5 +67,4 @@ void LeftSideOperationLayer::addTouchListener()
 
 LeftSideOperationLayer::~LeftSideOperationLayer()
 {
-    delete this->moveProtocol;
 }
