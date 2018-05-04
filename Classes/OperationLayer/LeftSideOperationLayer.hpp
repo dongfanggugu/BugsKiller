@@ -15,7 +15,6 @@ class LeftSideMoveProtocol
 {
 public:
     virtual void onMove(float length) = 0;
-    virtual ~LeftSideMoveProtocol(){};
 };
 
 class LeftSideOperationLayer : public cocos2d::Layer

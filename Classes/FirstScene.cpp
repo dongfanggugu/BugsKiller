@@ -15,6 +15,7 @@ using namespace cocos2d::ui;
 
 #define winSize Director::getInstance()->getWinSize()
 #define ArrowInitY 40
+#define SideWidth 100
 
 Scene* FirstScene::createScene()
 {
@@ -27,13 +28,13 @@ bool FirstScene::init()
     {
         return false;
     }
-    this->scheduleUpdate();
     this->addBackgroundLayer();
+    this->addBugsLayer();
+    this->scheduleUpdate();
     this->addCloseBtn();
     this->addSprite();
     this->addRightBtn();
     this->addFireBtn();
-    this->addBugsLayer();
     this->addLeftOperationLayer();
     return true;
 }
@@ -83,7 +84,7 @@ void FirstScene::update(float delta)
     this->checkCollison();
     auto pos = this->sprite->getPosition();
     auto size = this->sprite->getContentSize();
-    if ((pos.y + size.height) > winSize.height)
+    if ((pos.y - size.height / 2) > winSize.height)
     {
         this->sprite->stopAllActions();
         this->sprite->setPosition(Vec2(pos.x, 40));
@@ -128,23 +129,14 @@ void FirstScene::addSprite()
 {
     this->sprite = Sprite::create();
     this->sprite->setTexture("res/arrow.png");
+    this->sprite->setAnchorPoint(Vec2(0.5, 0));
+    this->sprite->setRotation(-45);
+//    this->sprite->setAnchorPoint(Vec2(0.5, 0.5));
     this->sprite->setContentSize(Size(15, 80));
     auto size = this->sprite->getContentSize();
     //this->sprite
-    this->sprite->setPosition(Vec2(winSize.width / 2, 40));
+    this->sprite->setPosition(Vec2(winSize.width - SideWidth, 40));
     this->addChild(this->sprite);
-
-//    auto animation = Animation::create();
-//
-//    for (int i = 1; i <= 15; i++)
-//    {
-//        std::string name = StringUtils::format("res/run/run%d.png", i);
-//        animation->addSpriteFrameWithFile(name);
-//    }
-//    animation->setDelayPerUnit(0.05);
-//    animation->setLoops(-1);
-//    auto animate = Animate::create(animation);
-//    sprite->runAction(animate);
 }
 
 void FirstScene::addBackgroundLayer()
@@ -198,6 +190,7 @@ void FirstScene::addLeftOperationLayer()
 {
     auto layer = LeftSideOperationLayer::create();
     layer->moveProtocol = this;
+    layer->setZOrder(5);
     this->addChild(layer);
 }
 

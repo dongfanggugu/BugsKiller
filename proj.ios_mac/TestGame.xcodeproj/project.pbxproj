@@ -76,6 +76,8 @@
 		EB7EF6532091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7EF6502091D5B00011D2C3 /* MosquitomLayer.cpp */; };
 		EB7EF6602092C43F0011D2C3 /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7EF65E2092C43F0011D2C3 /* LeftSideOperationLayer.cpp */; };
 		EB7EF6612092C43F0011D2C3 /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7EF65E2092C43F0011D2C3 /* LeftSideOperationLayer.cpp */; };
+		EBD491E6209C8AB60048A85A /* BaseBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD491E4209C8AB60048A85A /* BaseBullet.cpp */; };
+		EBD491E7209C8AB60048A85A /* BaseBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD491E4209C8AB60048A85A /* BaseBullet.cpp */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
 /* End PBXBuildFile section */
@@ -185,6 +187,8 @@
 		EB7EF6512091D5B00011D2C3 /* MosquitomLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MosquitomLayer.hpp; sourceTree = "<group>"; };
 		EB7EF65E2092C43F0011D2C3 /* LeftSideOperationLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LeftSideOperationLayer.cpp; sourceTree = "<group>"; };
 		EB7EF65F2092C43F0011D2C3 /* LeftSideOperationLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LeftSideOperationLayer.hpp; sourceTree = "<group>"; };
+		EBD491E4209C8AB60048A85A /* BaseBullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseBullet.cpp; sourceTree = "<group>"; };
+		EBD491E5209C8AB60048A85A /* BaseBullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseBullet.hpp; sourceTree = "<group>"; };
 		EBD90CCD2090233A00E1AA05 /* FirstScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstScene.h; sourceTree = "<group>"; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -325,6 +329,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EBD491E2209C8A8C0048A85A /* Bullet */,
 				EB7EF6562092C0C30011D2C3 /* OperationLayer */,
 				EB049418208F3914005CCE38 /* BackgroundLayer.cpp */,
 				EB04941A208F3914005CCE38 /* BackgroundLayer.h */,
@@ -395,6 +400,15 @@
 				EB7EF65F2092C43F0011D2C3 /* LeftSideOperationLayer.hpp */,
 			);
 			path = OperationLayer;
+			sourceTree = "<group>";
+		};
+		EBD491E2209C8A8C0048A85A /* Bullet */ = {
+			isa = PBXGroup;
+			children = (
+				EBD491E4209C8AB60048A85A /* BaseBullet.cpp */,
+				EBD491E5209C8AB60048A85A /* BaseBullet.hpp */,
+			);
+			path = Bullet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -556,6 +570,7 @@
 				EB7EF6602092C43F0011D2C3 /* LeftSideOperationLayer.cpp in Sources */,
 				EB04941B208F3914005CCE38 /* BackgroundLayer.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				EBD491E6209C8AB60048A85A /* BaseBullet.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				EB7EF6522091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */,
 				EB04940E208DDFF5005CCE38 /* FirstScene.cpp in Sources */,
@@ -568,6 +583,7 @@
 			files = (
 				EB7EF6532091D5B00011D2C3 /* MosquitomLayer.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				EBD491E7209C8AB60048A85A /* BaseBullet.cpp in Sources */,
 				EB7EF6612092C43F0011D2C3 /* LeftSideOperationLayer.cpp in Sources */,
 				EB049412208DE000005CCE38 /* FirstScene.cpp in Sources */,
 				EB04941C208F3914005CCE38 /* BackgroundLayer.cpp in Sources */,
