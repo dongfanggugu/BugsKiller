@@ -9,5 +9,16 @@
 #define BaseBullet_hpp
 
 #include <stdio.h>
+#include "cocos2d.h"
+
+class BaseBullet : public cocos2d::Ref
+{
+
+private:
+    cocos2d::Sprite *sprite;
+    float damage;
+    float speed;
+
+};
 
 #endif /* BaseBullet_hpp */

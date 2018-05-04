@@ -10,6 +10,9 @@
     <Filter Include="src\resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Bullet">
+      <UniqueIdentifier>{471ff2f9-2a9b-4b6b-8e51-4b1c062a97bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="..\Classes\OperationLayer\LeftSideOperationLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Bullet\BaseBullet.cpp">
+      <Filter>src\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\OperationLayer\LeftSideOperationLayer.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bullet\BaseBullet.hpp">
+      <Filter>src\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
