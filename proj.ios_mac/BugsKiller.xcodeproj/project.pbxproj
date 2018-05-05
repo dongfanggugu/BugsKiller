@@ -68,6 +68,7 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
+		EBCC1855209DA4BF00FD14D6 /* BaseBug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */; };
 		EBD4F437209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */; };
 		EBD4F438209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */; };
 		EBD4F439209D55030048A85A /* BaseArrow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42D209D54FC0048A85A /* BaseArrow.cpp */; };
@@ -180,6 +181,9 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseBug.cpp; sourceTree = "<group>"; };
+		EBCC1854209DA4BF00FD14D6 /* BaseBug.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseBug.hpp; sourceTree = "<group>"; };
+		EBCC1856209DA68200FD14D6 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		EBD4F422209D54F70048A85A /* FirstScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstScene.h; sourceTree = "<group>"; };
 		EBD4F426209D54F90048A85A /* MosquitomLayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MosquitomLayer.hpp; sourceTree = "<group>"; };
 		EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeftSideOperationLayer.cpp; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EBCC1851209DA4AA00FD14D6 /* Bug */,
 				EBD4F433209D55010048A85A /* BackgroundLayer.cpp */,
 				EBD4F430209D54FE0048A85A /* BackgroundLayer.h */,
 				EBD4F42C209D54FC0048A85A /* Arrow */,
@@ -341,6 +346,7 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+				EBCC1856209DA68200FD14D6 /* Constant.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -392,6 +398,15 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		EBCC1851209DA4AA00FD14D6 /* Bug */ = {
+			isa = PBXGroup;
+			children = (
+				EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */,
+				EBCC1854209DA4BF00FD14D6 /* BaseBug.hpp */,
+			);
+			path = Bug;
+			sourceTree = "<group>";
 		};
 		EBD4F429209D54FB0048A85A /* OperationLayer */ = {
 			isa = PBXGroup;
@@ -568,6 +583,7 @@
 				EBD4F43D209D55030048A85A /* FirstScene.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				EBD4F439209D55030048A85A /* BaseArrow.cpp in Sources */,
+				EBCC1855209DA4BF00FD14D6 /* BaseBug.cpp in Sources */,
 				EBD4F43F209D55030048A85A /* BackgroundLayer.cpp in Sources */,
 				EBD4F441209D55030048A85A /* MosquitomLayer.cpp in Sources */,
 				EBD4F437209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */,
