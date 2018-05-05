@@ -46,6 +46,15 @@ private:
     void checkCollison();
     void addBackgroundLayer();
     void addLeftOperationLayer();
+    
+    void addTouchFireListener();
+    void fireToPos(cocos2d::Vec2 pos);
+    float calAngle(cocos2d::Vec2 start, cocos2d::Vec2 end);
+    cocos2d::Vec2 calFinal(cocos2d::Vec2 start, cocos2d::Vec2 end);
+    
+    cocos2d::Vec2 arrowTopPoint();
+    
+    void resetArrow();
 };
 
 #endif /* FirstScene_hpp */

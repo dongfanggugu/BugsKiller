@@ -139,7 +139,6 @@ include_directories(
 	${COCOS2D_ROOT}
 	${COCOS2D_ROOT}/cocos
 	${COCOS2D_ROOT}/external
-	${COCOS2D_ROOT}/extensions
 	${COCOS2D_ROOT}/cocos/platform
 	${COCOS2D_ROOT}/cocos/audio/include/
 	Classes
@@ -159,16 +158,12 @@ set(GAME_SRC
         ${PLATFORM_SPECIFIC_SRC}
         Classes/AppDelegate.cpp
         Classes/HelloWorldScene.cpp
-        Classes/BackgroundLayer.cpp
-        Classes/FirstScene.cpp
         )
 
 set(GAME_HEADERS
         ${PLATFORM_SPECIFIC_HEADERS}
         Classes/AppDelegate.h
         Classes/HelloWorldScene.h
-        Classes/BackgroundLayer.h
-        Classes/FirstScene.h
         )
 
 # add the executable

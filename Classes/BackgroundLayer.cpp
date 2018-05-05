@@ -16,7 +16,7 @@ bool BackgroundLayer::init()
     {
         return false;
     }
-    this->setContentSize(Size(winSize.width - 200, winSize.height));
+    this->setContentSize(Size(winSize.width - 100, winSize.height));
     this->setAnchorPoint(Vec2(0.5, 0.5));
     this->addBackground();
     return true;

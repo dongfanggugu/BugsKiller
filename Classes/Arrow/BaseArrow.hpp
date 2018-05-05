@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "cocos2d.h"
 
-class BaseBullet : public cocos2d::Ref
+class BaseArrow : public cocos2d::Ref
 {
 
 private:

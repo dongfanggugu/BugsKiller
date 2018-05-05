@@ -18,7 +18,7 @@ bool MosquitomLayer::init()
     {
         return false;
     }
-    this->setContentSize(Size(winSize.width - 200, winSize.height));
+    this->setContentSize(Size(winSize.width - 100, winSize.height));
     scheduleUpdate();
     addSprite();
     return true;
