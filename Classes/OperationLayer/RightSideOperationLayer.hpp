@@ -9,6 +9,7 @@
 #define RightSideOperationLayer_hpp
 
 #include <stdio.h>
+#include <cocos2d.h>
 
 class RightSideOpProtocol
 {

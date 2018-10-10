@@ -9,6 +9,7 @@
 #define BallBoard_hpp
 
 #include <stdio.h>
+#include <cocos2d.h>
 
 class BallBoard : public cocos2d::Sprite
 {

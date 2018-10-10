@@ -7,9 +7,10 @@
 
 #include "FirstScene.h"
 #include "BackgroundLayer.h"
-#include "MosquitomLayer.hpp"
+//#include "MosquitomLayer.hpp"
 #include "Bug/BallBoard.hpp"
 #include "OperationLayer/RightSideOperationLayer.hpp"
+#include "Constant.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -64,38 +65,38 @@ void FirstScene::addOpLayer()
 
 void FirstScene::addBugsLayer()
 {
-    auto layer = MosquitomLayer::create();
-    layer->setPosition(Vec2::ZERO);
-    this->addChild(layer);
-    this->bugsLayer = layer;
+    ////auto layer = MosquitomLayer::create();
+    //layer->setPosition(Vec2::ZERO);
+    //this->addChild(layer);
+    //this->bugsLayer = layer;
 }
 
 void FirstScene::addRightBtn()
 {
-    auto btn = this->genBtn("right ->", "res/button.png", CC_CALLBACK_1(FirstScene::moveRight, this));
+   /* auto btn = this->genBtn("right ->", "res/button.png", CC_CALLBACK_1(FirstScene::moveRight, this));
     btn->setContentSize(Size(80, 30));
     btn->setPosition(Vec2(winSize.width - 40 - 8, winSize.height - 15 - 50));
-    this->addChild(btn);
+    this->addChild(btn);*/
 }
 
 void FirstScene::moveRight(Ref *sender)
 {
-    MoveBy * moveBy;
+   /* MoveBy * moveBy;
     moveBy = MoveBy::create(0.2, Vec2(5, 0));
-    this->sprite->runAction(moveBy);
+    this->sprite->runAction(moveBy);*/
 }
 
 void FirstScene::addFireBtn()
 {
-    auto btn = this->genBtn("FIRE", "res/button_fire.png", CC_CALLBACK_1(FirstScene::fireArrow, this));
+   /* auto btn = this->genBtn("FIRE", "res/button_fire.png", CC_CALLBACK_1(FirstScene::fireArrow, this));
     btn->setContentSize(Size(30, 30));
     btn->setPosition(Vec2(winSize.width - 100, winSize.height / 2));
-    this->addChild(btn);
+    this->addChild(btn);*/
 }
 
 void FirstScene::fireArrow(Ref *sender)
 {
-    auto point = this->arrowTopPoint();
+    //auto point = this->arrowTopPoint();
 //    auto pos = this->sprite->getPosition();
 //    auto size = this->sprite->getContentSize();
 //    auto moveTo = MoveTo::create(0.5, Vec2(0, winSize.height + size.height));
@@ -104,57 +105,57 @@ void FirstScene::fireArrow(Ref *sender)
 
 void FirstScene::update(float delta)
 {
-    checkCollison();
+   /* checkCollison();
     auto pos = this->sprite->getPosition();
     auto size = this->sprite->getContentSize();
     if ((pos.y >= winSize.height + size.height / 2) || (pos.x <= -size.width / 2))
     {
         resetArrow();
-    }
+    }*/
 }
 
-Button* FirstScene::genBtn(const std::string &title,
-                                        const std::string &icon,
-                                        const cocos2d::ui::Button::ccWidgetClickCallback &callback)
-{
-    auto btn = cocos2d::ui::Button::create();
-    if (title.length() > 0)
-    {
-        btn->setTitleText(title);
-    }
-    if (icon.length() > 0)
-    {
-        btn->loadTextureNormal(icon);
-    }
-    btn->addClickEventListener(callback);
-    return btn;
-}
+//Button* FirstScene::genBtn(const std::string &title,
+//                                        const std::string &icon,
+//                                        const cocos2d::ui::Button::ccWidgetClickCallback &callback)
+//{
+//    /*auto btn = cocos2d::ui::Button::create();
+//    if (title.length() > 0)
+//    {
+//        btn->setTitleText(title);
+//    }
+//    if (icon.length() > 0)
+//    {
+//        btn->loadTextureNormal(icon);
+//    }
+//    btn->addClickEventListener(callback);
+//    return btn;*/
+//}
 
 void close(Ref *sender)
 {
-    auto director = Director::getInstance();
+   /* auto director = Director::getInstance();
     director->end();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
-#endif
+#endif*/
 }
 
 void FirstScene::addCloseBtn()
 {
-    auto btn = this->genBtn("", "CloseNormal.png", &close);
+    /*auto btn = this->genBtn("", "CloseNormal.png", &close);
     btn->setContentSize(Size(30, 30));
     btn->setPosition(Vec2(winSize.width - 15, winSize.height - 15));
-    this->addChild(btn);
+    this->addChild(btn);*/
 }
 
 void FirstScene::addSprite()
 {
-    this->sprite = Sprite::create();
+    /*this->sprite = Sprite::create();
     this->sprite->setTexture("res/arrow.png");
     this->sprite->setContentSize(Size(15, 80));
     auto size = this->sprite->getContentSize();
     this->sprite->setPosition(Vec2(winSize.width - SideWidth, -40));
-    this->addChild(this->sprite);
+    this->addChild(this->sprite);*/
 }
 
 void FirstScene::addBackgroundLayer()
@@ -166,7 +167,7 @@ void FirstScene::addBackgroundLayer()
 
 void FirstScene::loadPackageImage()
 {
-    SpriteFrameCache *frameCache = SpriteFrameCache::getInstance();
+   /* SpriteFrameCache *frameCache = SpriteFrameCache::getInstance();
     frameCache->addSpriteFramesWithFile("res/run/boys.plist", "res/run/boys.png");
     int iFrameNum = 15;
     SpriteFrame *frame = NULL;
@@ -181,20 +182,20 @@ void FirstScene::loadPackageImage()
     animation->setDelayPerUnit(0.1f);
     auto action = Animate::create(animation);
     action->setTag(1001);
-    this->sprite->runAction(action);
+    this->sprite->runAction(action);*/
 }
 
 void FirstScene::move1(Ref *sender)
 {
 //    auto moveBy = MoveBy::create(8, Vec2(980, 0));
-    auto moveTo = MoveTo::create(8, Vec2(500, 0));
-//    auto ac = moveBy->reverse();
-    this->sprite->runAction(moveTo);
+//    auto moveTo = MoveTo::create(8, Vec2(500, 0));
+////    auto ac = moveBy->reverse();
+//    this->sprite->runAction(moveTo);
 }
 
 void FirstScene::checkCollison()
 {
-    auto rect = this->bugsLayer->getBugBoundBoxing();
+   /* auto rect = this->bugsLayer->getBugBoundBoxing();
     auto pos = this->bugsLayer->getPosition();
     auto newRect = Rect(rect.getMinX() + pos.x, rect.getMinY() + pos.y, rect.size.width, rect.size.height);
     
@@ -203,7 +204,7 @@ void FirstScene::checkCollison()
     {
         this->bugsLayer->bugDie();
         resetArrow();
-    }
+    }*/
 }
 
 void FirstScene::addLeftOperationLayer()
@@ -248,70 +249,70 @@ void FirstScene::addTouchFireListener()
 
 void FirstScene::fireToPos(Vec2 pos)
 {
-    auto start = Vec2(winSize.width - SideWidth, 0);
+    /*auto start = Vec2(winSize.width - SideWidth, 0);
     auto angle = this->calAngle(start, pos);
     this->sprite->setRotation(angle);
     auto fPos = this->calFinal(start, pos);
     auto moveTo = MoveTo::create(1, fPos);
-    this->sprite->runAction(moveTo);
+    this->sprite->runAction(moveTo);*/
 }
 
-float FirstScene::calAngle(cocos2d::Vec2 start, cocos2d::Vec2 end)
-{
-    if (end.x == start.x)
-    {
-        return 0;
-    }
-    
-    if (end.y  == start.y)
-    {
-        return -90;
-    }
-    
-    float tanAngle = (end.x - start.x) / (end.y - start.y);
-    float anglePI = atan(tanAngle);
-    return anglePI * 180 / M_PI;
-}
+//float FirstScene::calAngle(cocos2d::Vec2 start, cocos2d::Vec2 end)
+//{
+//   /* if (end.x == start.x)
+//    {
+//        return 0;
+//    }
+//    
+//    if (end.y  == start.y)
+//    {
+//        return -90;
+//    }
+//    
+//    float tanAngle = (end.x - start.x) / (end.y - start.y);
+//    float anglePI = atan(tanAngle);
+//    return anglePI * 180 / M_PI;*/
+//}
 
-cocos2d::Vec2 FirstScene::calFinal(cocos2d::Vec2 start, cocos2d::Vec2 end)
-{
-    float angle = this->calAngle(start, end);
-    float anglePI = angle * M_PI / 180;
-    if (0 == anglePI)
-    {
-        return Vec2(start.x, winSize.height + ArrowHeight / 2);
-    }
-    
-    if (-M_PI_2 == anglePI)
-    {
-        return Vec2(-ArrowHeight / 2, start.y);
-    }
-    
-    float x = -(winSize.height + ArrowHeight / 2) * tan(anglePI);
-    if (x > (ArrowHeight / 2 + winSize.width - SideWidth))
-    {
-        return Vec2(-ArrowHeight / 2, -(ArrowHeight / 2 + winSize.width - SideWidth) / tan(anglePI));
-    }
-    else
-    {
-        return Vec2((winSize.height + ArrowHeight / 2) * tan(anglePI) + (winSize.width - SideWidth), winSize.height + ArrowHeight / 2);
-    }
-}
+//cocos2d::Vec2 FirstScene::calFinal(cocos2d::Vec2 start, cocos2d::Vec2 end)
+//{
+//   /* float angle = this->calAngle(start, end);
+//    float anglePI = angle * M_PI / 180;
+//    if (0 == anglePI)
+//    {
+//        return Vec2(start.x, winSize.height + ArrowHeight / 2);
+//    }
+//    
+//    if (-M_PI_2 == anglePI)
+//    {
+//        return Vec2(-ArrowHeight / 2, start.y);
+//    }
+//    
+//    float x = -(winSize.height + ArrowHeight / 2) * tan(anglePI);
+//    if (x > (ArrowHeight / 2 + winSize.width - SideWidth))
+//    {
+//        return Vec2(-ArrowHeight / 2, -(ArrowHeight / 2 + winSize.width - SideWidth) / tan(anglePI));
+//    }
+//    else
+//    {
+//        return Vec2((winSize.height + ArrowHeight / 2) * tan(anglePI) + (winSize.width - SideWidth), winSize.height + ArrowHeight / 2);
+//    }*/
+//}
 
-Vec2 FirstScene::arrowTopPoint()
-{
-    auto pos = this->sprite->getPosition();
-    auto size = this->sprite->getContentSize();
-    auto angle = this->sprite->getRotation();
-    auto anglePI = angle * M_PI / 180;
-    auto offSetX = size.height / 2 * cos(anglePI);
-    auto offSetY = size.height / 2 * sin(anglePI);
-    return Vec2(pos.x - offSetX, pos.y - offSetY);
-}
+//Vec2 FirstScene::arrowTopPoint()
+//{
+//   /* auto pos = this->sprite->getPosition();
+//    auto size = this->sprite->getContentSize();
+//    auto angle = this->sprite->getRotation();
+//    auto anglePI = angle * M_PI / 180;
+//    auto offSetX = size.height / 2 * cos(anglePI);
+//    auto offSetY = size.height / 2 * sin(anglePI);
+//    return Vec2(pos.x - offSetX, pos.y - offSetY);*/
+//}
 
 void FirstScene::resetArrow()
 {
-    this->sprite->stopAllActions();
+   /* this->sprite->stopAllActions();
     this->sprite->setPosition(Vec2(winSize.width - SideWidth, -ArrowHeight / 2));
-    this->sprite->setRotation(0);
+    this->sprite->setRotation(0);*/
 }
