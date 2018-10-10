@@ -8,6 +8,8 @@
 #include "FirstScene.h"
 #include "BackgroundLayer.h"
 #include "MosquitomLayer.hpp"
+#include "Bug/BallBoard.hpp"
+#include "OperationLayer/RightSideOperationLayer.hpp"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -30,14 +32,34 @@ bool FirstScene::init()
         return false;
     }
     this->addBackgroundLayer();
-    this->addBugsLayer();
-    this->scheduleUpdate();
-    this->addCloseBtn();
-    this->addSprite();
-    this->addRightBtn();
-    this->addFireBtn();
-    this->addTouchFireListener();
+    this->addBallBoard();
+    this->addOpLayer();
+//    this->addBugsLayer();
+//    this->scheduleUpdate();
+//    this->addCloseBtn();
+//    this->addSprite();
+//    this->addRightBtn();
+//    this->addFireBtn();
+//    this->addTouchFireListener();
     return true;
+}
+
+void FirstScene::addBallBoard()
+{
+    auto board = BallBoard::create("res/ballboard.png");
+    float width = WinSize.width;
+    board->setPosition(Vec2(width / 2, 15));
+    this->sprite = board;
+    this->addChild(board);
+}
+
+void FirstScene::addOpLayer()
+{
+    auto layer = RightSideOperationLayer::create();
+    layer->moveProtocol = this;
+    layer->setContentSize(Size(40, 300));
+    layer->setPosition(Vec2(WinSize.width - 50, WinSize.height / 2 - 150));
+    this->addChild(layer);
 }
 
 void FirstScene::addBugsLayer()
@@ -138,7 +160,7 @@ void FirstScene::addSprite()
 void FirstScene::addBackgroundLayer()
 {
     auto layer = BackgroundLayer::create();
-    layer->setPosition(Vec2(winSize.width / 2 - 50, winSize.height / 2));
+    layer->setPosition(Vec2(winSize.width / 2 , winSize.height / 2));
     this->addChild(layer);
 }
 
@@ -186,9 +208,9 @@ void FirstScene::checkCollison()
 
 void FirstScene::addLeftOperationLayer()
 {
-    auto layer = LeftSideOperationLayer::create();
-    layer->moveProtocol = this;
-    this->addChild(layer);
+//    auto layer = LeftSideOperationLayer::create();
+//    layer->moveProtocol = this;
+//    this->addChild(layer);
 }
 
 FirstScene::~FirstScene()
@@ -196,14 +218,15 @@ FirstScene::~FirstScene()
     log("dealloc");
 }
 
-void FirstScene::onMove(float length)
+void FirstScene::onMove(float delta)
 {
     auto pos = this->sprite->getPosition();
-    if (pos.y != ArrowInitY)
-    {
-        return;
-    }
-    this->sprite->setPosition(200 + length, pos.y);
+    auto size = this->sprite->getContentSize();
+    float x = pos.x + delta;
+    x = MIN(x, WinSize.width - size.width / 2);
+    x = MAX(x, size.width / 2);
+    auto newPos = Vec2(x, pos.y);
+    this->sprite->setPosition(newPos);
 }
 
 void FirstScene::addTouchFireListener()

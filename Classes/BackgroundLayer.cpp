@@ -24,8 +24,8 @@ bool BackgroundLayer::init()
 
 void BackgroundLayer::addBackground()
 {
-    auto aa = getAnchorPoint();
     auto background = Scale9Sprite::create("res/background.PNG");
+    background->setAnchorPoint(Vec2(0.5, 0.5));
     background->setScale9Enabled(true);
     background->setContentSize(this->getContentSize());
     background->setPosition(Vec2::ZERO);

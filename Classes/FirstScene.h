@@ -11,16 +11,16 @@
 #include <stdio.h>
 #include "cocos2d.h"
 #include "cocos-ext.h"
-#include "./OperationLayer/LeftSideOperationLayer.hpp"
+#include "OperationLayer/RightSideOperationLayer.hpp"
 #include "MosquitomLayer.hpp"
 
-class FirstScene : public cocos2d::Scene, public LeftSideMoveProtocol
+class FirstScene : public cocos2d::Scene, public RightSideOpProtocol
 {
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
     virtual void update(float delta);
-    virtual void onMove(float length);
+    virtual void onMove(float delta);
     CREATE_FUNC(FirstScene);
     virtual ~FirstScene();
     
@@ -55,6 +55,9 @@ private:
     cocos2d::Vec2 arrowTopPoint();
     
     void resetArrow();
+    
+    void addBallBoard();
+    void addOpLayer();
 };
 
 #endif /* FirstScene_hpp */
