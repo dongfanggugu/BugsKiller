@@ -32,4 +32,6 @@ inline type* getM##name(){\
 return m##name;\
 }\
 
+#define WinSize Director::getInstance()->getWinSize()
+
 #endif /* Constant_h */
