@@ -8,18 +8,27 @@
 #include "FirstScene.h"
 #include "BackgroundLayer.h"
 //#include "MosquitomLayer.hpp"
-#include "Bug/BallBoard.hpp"
 #include "OperationLayer/RightSideOperationLayer.hpp"
 #include "Constant.h"
+#include "Bug/BallBoard.hpp"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace cocos2d::ui;
 
-#define winSize Director::getInstance()->getWinSize()
 #define ArrowInitY 40
 #define SideWidth 100
 #define ArrowHeight 80
+
+#define RowAbility 10.0
+#define RowCount 5
+
+#define BallWH 20.0
+
+#define BoardW 80.0
+#define BoardH 16.0
+
+#define PTM_RADIO 10
 
 Scene* FirstScene::createScene()
 {
@@ -32,11 +41,17 @@ bool FirstScene::init()
     {
         return false;
     }
-    this->addBackgroundLayer();
-    this->addBallBoard();
-    this->addOpLayer();
+    initWorld();
+    initGround();
+    addBackgroundLayer();
+    addBallBoard();
+    addOpLayer();
+    addBricks();
+    addBall();
+    ballSpeed = 10;
+    ballAngle = 60;
+    scheduleUpdate();
 //    this->addBugsLayer();
-//    this->scheduleUpdate();
 //    this->addCloseBtn();
 //    this->addSprite();
 //    this->addRightBtn();
@@ -47,10 +62,11 @@ bool FirstScene::init()
 
 void FirstScene::addBallBoard()
 {
-    auto board = BallBoard::create("res/ballboard.png");
+    auto board = BallBoard::create();
     float width = WinSize.width;
     board->setPosition(Vec2(width / 2, 15));
-    this->sprite = board;
+    board->setContentSize(Size(BoardW, BoardH));
+    mBoard = board;
     this->addChild(board);
 }
 
@@ -61,6 +77,89 @@ void FirstScene::addOpLayer()
     layer->setContentSize(Size(40, 300));
     layer->setPosition(Vec2(WinSize.width - 50, WinSize.height / 2 - 150));
     this->addChild(layer);
+}
+
+Vec2 FirstScene::calBrickPos(int index, Size size)
+{
+    int row = index / int(RowAbility);
+    int column = index % int(RowAbility);
+    float x = (size.width + 1) * column + size.width / 2;
+    float y = WinSize.height - ((size.height + 1) * row + size.height / 2);
+    return Vec2(x, y);
+}
+
+void FirstScene::addBricks()
+{
+    for (int i = 0; i < RowCount * RowAbility; i++)
+    {
+        auto brick = genBrick(i);
+        Vec2 pos = calBrickPos(i, brick->getContentSize());
+        brick->setPosition(pos);
+        this->addChild(brick);
+    }
+}
+
+Brick* FirstScene::genBrick(int index)
+{
+    //calcue the height and width of brick
+    auto brick = Brick::create();
+    brick->setPTMRatio(PTM_RADIO);
+    auto size = brick->getContentSize();
+    float width = (WinSize.width - 9) / RowAbility;
+    float scale = width / size.width;
+    float height = size.height * scale;
+    
+    b2BodyDef b2BodyDef;
+    b2BodyDef.type = b2_staticBody;
+    b2Body *body = mWorld->CreateBody(&b2BodyDef);
+    
+    b2PolygonShape shape;
+    shape.SetAsBox(width / 2 / PTM_RADIO, height / 2 /PTM_RADIO);
+    
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = 20;
+    fixtureDef.friction = 0;
+    fixtureDef.restitution = 0;
+    body->CreateFixture(&fixtureDef);
+    body->SetUserData(brick);
+    brick->setB2Body(body);
+   
+    brick->setContentSize(Size(width, height));
+    return brick;
+}
+
+void FirstScene::addBall()
+{
+    mBall = Ball::create();
+    //定义一个物体
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    b2Body *body = mWorld->CreateBody(&bodyDef);
+    
+    //设置物体形状
+    b2CircleShape dynamicCircle;
+    dynamicCircle.m_radius = BallWH / PTM_RADIO;
+    
+    //设置物理属性
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicCircle;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.0f;
+    fixtureDef.restitution = 1.0f;
+    body->CreateFixture(&fixtureDef);
+    body->ApplyLinearImpulse(body->GetMass() * b2Vec2(10, 10), body->GetWorldCenter(), false);
+    mBall->setB2Body(body);
+    
+    mBall->setPTMRatio(PTM_RADIO);
+    Size size = mBall->getContentSize();
+    float scale = BallWH / size.width;
+    mBall->setScale(scale);
+    auto pos = mBoard->getPosition();
+    float x = pos.x;
+    float y = pos.y + BoardH / 2 + BoardH / 2;
+    mBall->setPosition(Vec2(x, y));
+    addChild(mBall);
 }
 
 void FirstScene::addBugsLayer()
@@ -105,13 +204,32 @@ void FirstScene::fireArrow(Ref *sender)
 
 void FirstScene::update(float delta)
 {
-   /* checkCollison();
-    auto pos = this->sprite->getPosition();
-    auto size = this->sprite->getContentSize();
-    if ((pos.y >= winSize.height + size.height / 2) || (pos.x <= -size.width / 2))
+    int velocityIterations = 8;
+    int positionIterations = 1;
+    
+    mWorld->Step(1.0 / 60.0, velocityIterations, positionIterations);
+    
+    //remove brick needed to remove
+    removeBricks();
+}
+
+void FirstScene::removeBricks()
+{
+    for (Vector<Brick *>::iterator it = mVector.begin(); it != mVector.end(); it++)
     {
-        resetArrow();
-    }*/
+        Brick *sp = *it;
+        mWorld->DestroyBody(sp->getB2Body());
+        sp->removeFromParent();
+    }
+    mVector.clear();
+}
+
+Vec2 FirstScene::nextBallPositon(float timeDelta)
+{
+    auto cPos = mBall->getPosition();
+    float x = ballSpeed * timeDelta * cos(ballAngle / M_PI);
+    float y = ballSpeed * timeDelta * sin(ballAngle / M_PI);
+    return Vec2(cPos.x + x, cPos.y + y);
 }
 
 //Button* FirstScene::genBtn(const std::string &title,
@@ -161,7 +279,7 @@ void FirstScene::addSprite()
 void FirstScene::addBackgroundLayer()
 {
     auto layer = BackgroundLayer::create();
-    layer->setPosition(Vec2(winSize.width / 2 , winSize.height / 2));
+    layer->setPosition(Vec2(WinSize.width / 2 , WinSize.height / 2));
     this->addChild(layer);
 }
 
@@ -221,13 +339,13 @@ FirstScene::~FirstScene()
 
 void FirstScene::onMove(float delta)
 {
-    auto pos = this->sprite->getPosition();
-    auto size = this->sprite->getContentSize();
+    auto pos = mBoard->getPosition();
+    auto size = mBoard->getContentSize();
     float x = pos.x + delta;
     x = MIN(x, WinSize.width - size.width / 2);
     x = MAX(x, size.width / 2);
     auto newPos = Vec2(x, pos.y);
-    this->sprite->setPosition(newPos);
+    mBoard->setPosition(newPos);
 }
 
 void FirstScene::addTouchFireListener()
@@ -316,3 +434,56 @@ void FirstScene::resetArrow()
     this->sprite->setPosition(Vec2(winSize.width - SideWidth, -ArrowHeight / 2));
     this->sprite->setRotation(0);*/
 }
+
+void FirstScene::initWorld()
+{
+    b2Vec2 gravity = b2Vec2(0, 0);
+    mWorld = new b2World(gravity);
+    mWorld->SetContactListener(this);
+}
+
+void FirstScene::initGround()
+{
+    b2BodyDef b2BodyDef;
+    b2Body *groundBody = mWorld->CreateBody(&b2BodyDef);
+    
+    b2EdgeShape groundBox;
+    //left
+    groundBox.Set(b2Vec2(50 / PTM_RADIO, 0), b2Vec2(50 / PTM_RADIO, WinSize.height / PTM_RADIO));
+    groundBody->CreateFixture(&groundBox, 0);
+    //top
+    groundBox.Set(b2Vec2(50 / PTM_RADIO, WinSize.height / PTM_RADIO),
+                  b2Vec2((WinSize.width - 50) / PTM_RADIO, WinSize.height / PTM_RADIO));
+    groundBody->CreateFixture(&groundBox, 0);
+    //right
+    groundBox.Set(b2Vec2((WinSize.width - 50) / PTM_RADIO, 0),
+                  b2Vec2((WinSize.width - 50) / PTM_RADIO, WinSize.height / PTM_RADIO));
+    groundBody->CreateFixture(&groundBox, 0);
+    //bottom
+    groundBox.Set(b2Vec2(50 / PTM_RADIO, 0),
+                  b2Vec2((WinSize.width - 50) / PTM_RADIO, 0));
+    groundBody->CreateFixture(&groundBox, 0);
+}
+
+void FirstScene::BeginContact(b2Contact *contact)
+{
+    b2Fixture *bodyA = contact->GetFixtureA();
+    b2Fixture *bodyB = contact->GetFixtureB();
+    if (bodyA->GetShape()->GetType() == b2Shape::e_polygon)
+    {
+        auto sp = static_cast<Brick *>(bodyA->GetBody()->GetUserData());
+        mVector.pushBack(sp);
+    }
+    
+    if (bodyB->GetShape()->GetType() == b2Shape::e_polygon)
+    {
+        auto sp = static_cast<Brick *>(bodyB->GetBody()->GetUserData());
+        mVector.pushBack(sp);
+    }
+}
+
+void FirstScene::EndContact(b2Contact *contact)
+{
+    
+}
+

@@ -10,3 +10,14 @@
 USING_NS_CC;
 using namespace std;
 
+BallBoard* BallBoard::create()
+{
+    BallBoard *board = new BallBoard();
+    if (board && board->initWithFile("res/ballboard.png"))
+    {
+        board->autorelease();
+        return board;
+    }
+    CC_SAFE_DELETE(board);
+    return nullptr;
+}

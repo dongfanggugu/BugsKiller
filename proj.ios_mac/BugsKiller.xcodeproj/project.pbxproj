@@ -72,6 +72,10 @@
 		EB3CFF3B216DF033003AADD7 /* BallBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB3CFF38216DF032003AADD7 /* BallBoard.cpp */; };
 		EB3CFF3F216E05D7003AADD7 /* RightSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB3CFF3D216E05D7003AADD7 /* RightSideOperationLayer.cpp */; };
 		EB3CFF40216E05D7003AADD7 /* RightSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB3CFF3D216E05D7003AADD7 /* RightSideOperationLayer.cpp */; };
+		EBB9D185216EE5FF00B111F2 /* Brick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D183216EE5FF00B111F2 /* Brick.cpp */; };
+		EBB9D186216EE5FF00B111F2 /* Brick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D183216EE5FF00B111F2 /* Brick.cpp */; };
+		EBB9D18B216EEFE100B111F2 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D189216EEFE100B111F2 /* Ball.cpp */; };
+		EBB9D18C216EEFE100B111F2 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D189216EEFE100B111F2 /* Ball.cpp */; };
 		EBCC1855209DA4BF00FD14D6 /* BaseBug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */; };
 		EBD4F437209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */; };
 		EBD4F438209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */; };
@@ -189,6 +193,10 @@
 		EB3CFF39216DF032003AADD7 /* BallBoard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BallBoard.hpp; sourceTree = "<group>"; };
 		EB3CFF3D216E05D7003AADD7 /* RightSideOperationLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RightSideOperationLayer.cpp; sourceTree = "<group>"; };
 		EB3CFF3E216E05D7003AADD7 /* RightSideOperationLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RightSideOperationLayer.hpp; sourceTree = "<group>"; };
+		EBB9D183216EE5FF00B111F2 /* Brick.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Brick.cpp; sourceTree = "<group>"; };
+		EBB9D184216EE5FF00B111F2 /* Brick.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Brick.hpp; sourceTree = "<group>"; };
+		EBB9D189216EEFE100B111F2 /* Ball.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
+		EBB9D18A216EEFE100B111F2 /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 		EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseBug.cpp; sourceTree = "<group>"; };
 		EBCC1854209DA4BF00FD14D6 /* BaseBug.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseBug.hpp; sourceTree = "<group>"; };
 		EBCC1856209DA68200FD14D6 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -414,6 +422,10 @@
 				EBCC1854209DA4BF00FD14D6 /* BaseBug.hpp */,
 				EB3CFF38216DF032003AADD7 /* BallBoard.cpp */,
 				EB3CFF39216DF032003AADD7 /* BallBoard.hpp */,
+				EBB9D183216EE5FF00B111F2 /* Brick.cpp */,
+				EBB9D184216EE5FF00B111F2 /* Brick.hpp */,
+				EBB9D189216EEFE100B111F2 /* Ball.cpp */,
+				EBB9D18A216EEFE100B111F2 /* Ball.hpp */,
 			);
 			path = Bug;
 			sourceTree = "<group>";
@@ -600,6 +612,8 @@
 				EBCC1855209DA4BF00FD14D6 /* BaseBug.cpp in Sources */,
 				EBD4F43F209D55030048A85A /* BackgroundLayer.cpp in Sources */,
 				EBD4F441209D55030048A85A /* MosquitomLayer.cpp in Sources */,
+				EBB9D18B216EEFE100B111F2 /* Ball.cpp in Sources */,
+				EBB9D185216EE5FF00B111F2 /* Brick.cpp in Sources */,
 				EBD4F437209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -611,12 +625,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBB9D18C216EEFE100B111F2 /* Ball.cpp in Sources */,
 				EBD4F438209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */,
 				EB3CFF3B216DF033003AADD7 /* BallBoard.cpp in Sources */,
 				EBD4F442209D55030048A85A /* MosquitomLayer.cpp in Sources */,
 				EBD4F440209D55030048A85A /* BackgroundLayer.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				EB3CFF40216E05D7003AADD7 /* RightSideOperationLayer.cpp in Sources */,
+				EBB9D186216EE5FF00B111F2 /* Brick.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				EBD4F43E209D55030048A85A /* FirstScene.cpp in Sources */,
 				EBD4F43A209D55030048A85A /* BaseArrow.cpp in Sources */,
@@ -655,7 +671,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_FILE32API,
 					"COCOS2D_DEBUG=1",
-					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					"CC_ENABLE_CHIPMUNK_INTEGRATION=0",
+					"CC_ENABLE_BOX2D_INTEGRATION=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -721,7 +738,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_FILE32API,
 					"COCOS2D_DEBUG=1",
-					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					"CC_ENABLE_BOX2D_INTEGRATION=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
@@ -750,7 +767,7 @@
 				GCC_PREFIX_HEADER = mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_FILE32API,
-					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					"CC_ENABLE_BOX2D_INTEGRATION=1",
 					NDEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;

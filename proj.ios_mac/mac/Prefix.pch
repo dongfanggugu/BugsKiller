@@ -10,3 +10,6 @@
 	#include "cocos2d.h"
 #endif
 #include "../../Classes/Constant.h"
+
+#define CC_ENABLE_BOX2D_INTEGRATION 1
+#define CC_ENABLE_CHIPMUNK_INTEGRATION 0

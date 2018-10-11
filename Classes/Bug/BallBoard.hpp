@@ -13,7 +13,8 @@
 
 class BallBoard : public cocos2d::Sprite
 {
-
+public:
+    static BallBoard* create();
 };
 
 #endif /* BallBoard_hpp */
