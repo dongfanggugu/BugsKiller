@@ -10,6 +10,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Sprites">
+      <UniqueIdentifier>{3c2e3333-e116-4bd9-bca7-c2038cf89601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Layers">
+      <UniqueIdentifier>{13b79986-f9fb-414a-8fd6-88658322c988}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,23 +27,23 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\FirstScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\OperationLayer\RightSideOperationLayer.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Bug\Ball.cpp">
+      <Filter>src\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Bug\BallBoard.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Bug\Ball.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Bug\Brick.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\OperationLayer\RightSideOperationLayer.cpp">
+      <Filter>src\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
+      <Filter>src\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,26 +56,26 @@
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BackgroundLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Constant.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FirstScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\OperationLayer\RightSideOperationLayer.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Bug\Ball.hpp">
+      <Filter>src\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Bug\BallBoard.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Bug\Ball.hpp">
-      <Filter>src</Filter>
+      <Filter>src\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Bug\Brick.hpp">
-      <Filter>src</Filter>
+      <Filter>src\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\OperationLayer\RightSideOperationLayer.hpp">
+      <Filter>src\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundLayer.h">
+      <Filter>src\Layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

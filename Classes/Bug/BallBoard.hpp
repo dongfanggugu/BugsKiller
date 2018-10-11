@@ -10,11 +10,13 @@
 
 #include <stdio.h>
 #include <cocos2d.h>
+#include <cocos-ext.h>
+#include "Box2D/Box2D.h"
 
-class BallBoard : public cocos2d::Sprite
+class BallBoard : public cocos2d::extension::PhysicsSprite
 {
 public:
-    static BallBoard* create();
+    static BallBoard* create(b2World *world);
 };
 
 #endif /* BallBoard_hpp */

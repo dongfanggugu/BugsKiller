@@ -10,7 +10,7 @@
 USING_NS_CC;
 using namespace std;
 
-BallBoard* BallBoard::create()
+BallBoard* BallBoard::create(b2World *world)
 {
     BallBoard *board = new BallBoard();
     if (board && board->initWithFile("res/ballboard.png"))
