@@ -14,19 +14,21 @@
 class RightSideOpProtocol
 {
 public:
-    virtual void onMove(float delta) = 0;
+    virtual void onMove(float delta, unsigned tag) = 0;
 };
 
 class RightSideOperationLayer : public cocos2d::LayerColor
 {
 public:
-    bool init();
-    CREATE_FUNC(RightSideOperationLayer);
+    bool init(float width, float height);
+    static RightSideOperationLayer* create(float width, float height);
     RightSideOpProtocol *moveProtocol;
     
 private:
+    void addBackground(float width, float height);
     void addTouchListener();
     cocos2d::Vec2 startPoint;
+    PropertyBuilderByName(unsigned int, tag, private);
 };
 
 #endif /* RightSideOperationLayer_hpp */

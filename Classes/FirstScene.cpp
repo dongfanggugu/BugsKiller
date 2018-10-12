@@ -11,13 +11,14 @@
 #include "OperationLayer/RightSideOperationLayer.hpp"
 #include "Constant.h"
 #include "Bug/BallBoard.hpp"
+#include "GLES-Render.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace cocos2d::ui;
 
 #define ArrowInitY 40
-#define SideWidth 100
+#define BgMargin 100
 #define ArrowHeight 80
 
 #define RowAbility 10.0
@@ -25,7 +26,7 @@ using namespace cocos2d::ui;
 
 #define BallWH 20.0
 
-#define BoardW 80.0
+#define BoardW (WinSize.width / (RowAbility - 2))
 #define BoardH 16.0
 
 #define PTM_RADIO 10
@@ -46,6 +47,7 @@ bool FirstScene::init()
     addBackgroundLayer();
     addBallBoard();
     addOpLayer();
+    addRotationLayer();
     addBricks();
     addBall();
     ballSpeed = 10;
@@ -62,7 +64,7 @@ bool FirstScene::init()
 
 void FirstScene::addBallBoard()
 {
-    auto board = BallBoard::create();
+    auto board = BallBoard::create(mWorld, PTM_RADIO, BoardW, BoardH);
     float width = WinSize.width;
     board->setPosition(Vec2(width / 2, 15));
     board->setContentSize(Size(BoardW, BoardH));
@@ -72,10 +74,19 @@ void FirstScene::addBallBoard()
 
 void FirstScene::addOpLayer()
 {
-    auto layer = RightSideOperationLayer::create();
+    auto layer = RightSideOperationLayer::create(40, WinSize.height / 2);
+    layer->settag(1);
     layer->moveProtocol = this;
-    layer->setContentSize(Size(40, 300));
-    layer->setPosition(Vec2(WinSize.width - 50, WinSize.height / 2 - 150));
+    layer->setPosition(Vec2(10, 50));
+    this->addChild(layer);
+}
+
+void FirstScene::addRotationLayer()
+{
+    auto layer = RightSideOperationLayer::create(40, WinSize.height / 2);
+    layer->settag(2);
+    layer->moveProtocol = this;
+    layer->setPosition(Vec2(WinSize.width - 10 - 40, 50));
     this->addChild(layer);
 }
 
@@ -83,7 +94,7 @@ Vec2 FirstScene::calBrickPos(int index, Size size)
 {
     int row = index / int(RowAbility);
     int column = index % int(RowAbility);
-    float x = (size.width + 1) * column + size.width / 2;
+    float x = BgMargin / 2 + (size.width + 1) * column + size.width / 2;
     float y = WinSize.height - ((size.height + 1) * row + size.height / 2);
     return Vec2(x, y);
 }
@@ -105,7 +116,7 @@ Brick* FirstScene::genBrick(int index)
     auto brick = Brick::create();
     brick->setPTMRatio(PTM_RADIO);
     auto size = brick->getContentSize();
-    float width = (WinSize.width - 9) / RowAbility;
+    float width = (WinSize.width - 9 - BgMargin) / RowAbility;
     float scale = width / size.width;
     float height = size.height * scale;
     
@@ -139,7 +150,7 @@ void FirstScene::addBall()
     
     //设置物体形状
     b2CircleShape dynamicCircle;
-    dynamicCircle.m_radius = BallWH / PTM_RADIO;
+    dynamicCircle.m_radius = BallWH / 2 / PTM_RADIO;
     
     //设置物理属性
     b2FixtureDef fixtureDef;
@@ -148,13 +159,11 @@ void FirstScene::addBall()
     fixtureDef.friction = 0.0f;
     fixtureDef.restitution = 1.0f;
     body->CreateFixture(&fixtureDef);
-    body->ApplyLinearImpulse(body->GetMass() * b2Vec2(10, 10), body->GetWorldCenter(), false);
+    body->ApplyLinearImpulse(body->GetMass() * b2Vec2(20, 20), body->GetWorldCenter(), false);
     mBall->setB2Body(body);
     
     mBall->setPTMRatio(PTM_RADIO);
-    Size size = mBall->getContentSize();
-    float scale = BallWH / size.width;
-    mBall->setScale(scale);
+    mBall->setContentSize(Size(BallWH, BallWH));
     auto pos = mBoard->getPosition();
     float x = pos.x;
     float y = pos.y + BoardH / 2 + BoardH / 2;
@@ -278,7 +287,7 @@ void FirstScene::addSprite()
 
 void FirstScene::addBackgroundLayer()
 {
-    auto layer = BackgroundLayer::create();
+    auto layer = BackgroundLayer::create("res/background.PNG", WinSize.width - BgMargin, WinSize.height);
     layer->setPosition(Vec2(WinSize.width / 2 , WinSize.height / 2));
     this->addChild(layer);
 }
@@ -337,15 +346,37 @@ FirstScene::~FirstScene()
     log("dealloc");
 }
 
-void FirstScene::onMove(float delta)
+float opRadio()
 {
-    auto pos = mBoard->getPosition();
-    auto size = mBoard->getContentSize();
-    float x = pos.x + delta;
-    x = MIN(x, WinSize.width - size.width / 2);
-    x = MAX(x, size.width / 2);
-    auto newPos = Vec2(x, pos.y);
-    mBoard->setPosition(newPos);
+    return (WinSize.width - BgMargin) / (WinSize.height / 2);
+}
+
+void FirstScene::onMove(float delta, unsigned tag)
+{
+    if (1 == tag)
+    {
+        mBoard->setRotation(0);
+        auto pos = mBoard->getPosition();
+        auto size = mBoard->getContentSize();
+        float x = pos.x + delta * opRadio();
+        x = MIN(x, WinSize.width - size.width / 2);
+        x = MAX(x, size.width / 2);
+        auto newPos = Vec2(x, pos.y);
+        mBoard->setPosition(newPos);
+    }
+    else if (2 == tag)
+    {
+        rotationBoard(delta);
+    }
+}
+
+void FirstScene::rotationBoard(float angle)
+{
+    float curAngle = mBoard->getRotation();
+    float newAngle = curAngle + angle;
+    newAngle = MIN(newAngle, 30);
+    newAngle = MAX(newAngle, -30);
+    mBoard->setRotation(newAngle);
 }
 
 void FirstScene::addTouchFireListener()
@@ -440,6 +471,7 @@ void FirstScene::initWorld()
     b2Vec2 gravity = b2Vec2(0, 0);
     mWorld = new b2World(gravity);
     mWorld->SetContactListener(this);
+    setB2boxDebug();
 }
 
 void FirstScene::initGround()
@@ -467,17 +499,19 @@ void FirstScene::initGround()
 
 void FirstScene::BeginContact(b2Contact *contact)
 {
-    b2Fixture *bodyA = contact->GetFixtureA();
-    b2Fixture *bodyB = contact->GetFixtureB();
-    if (bodyA->GetShape()->GetType() == b2Shape::e_polygon)
+    b2Body *bodyA = contact->GetFixtureA()->GetBody();
+    b2Body *bodyB = contact->GetFixtureB()->GetBody();
+    auto userDataA = bodyA->GetUserData();
+    auto userDataB = bodyB->GetUserData();
+    if (userDataA)
     {
-        auto sp = static_cast<Brick *>(bodyA->GetBody()->GetUserData());
+        auto sp = static_cast<Brick *>(userDataA);
         mVector.pushBack(sp);
     }
     
-    if (bodyB->GetShape()->GetType() == b2Shape::e_polygon)
+    if (userDataB)
     {
-        auto sp = static_cast<Brick *>(bodyB->GetBody()->GetUserData());
+        auto sp = static_cast<Brick *>(userDataB);
         mVector.pushBack(sp);
     }
 }
@@ -485,5 +519,23 @@ void FirstScene::BeginContact(b2Contact *contact)
 void FirstScene::EndContact(b2Contact *contact)
 {
     
+}
+
+void FirstScene::setB2boxDebug()
+{
+    auto debugDraw = new GLESDebugDraw(PTM_RADIO);
+    uint32 flags = 0;
+    flags += b2Draw::e_shapeBit;
+    flags += b2Draw::e_jointBit;
+    flags += b2Draw::e_centerOfMassBit;
+    debugDraw->SetFlags(flags);
+    mWorld->SetDebugDraw(debugDraw);
+}
+
+void FirstScene::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags)
+{
+    GL::enableVertexAttribs(cocos2d::GL::VERTEX_ATTRIB_FLAG_POSITION);
+    mWorld->DrawDebugData();
+    CHECK_GL_ERROR_DEBUG();
 }
 

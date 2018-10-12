@@ -8,17 +8,22 @@
 class BackgroundLayer : public cocos2d::Layer
 {
 public:
-    virtual bool init();
-    CREATE_FUNC(BackgroundLayer);
-    virtual ~BackgroundLayer();
-   
-     static int currentBgImageIndex;
-     void addBackground();
-     static int rollTime;
-     void startRollbg();
-     void stop();
-
-     bool isFastRoll = false;
+    
+    static BackgroundLayer* create(const std::string &filename, float width, float height);
+    
+private:
+    
+    bool init(const std::string &filename, float width, float height);
+    //property
+    static int currentBgImageIndex;
+    bool isFastRoll = false;
+    static int rollTime;
+    //method
+    
+    void addBackground(const std::string &filename);
+    void startRollbg();
+    void stop();
+    
 };
 
 #endif // BackgroundLayer_h

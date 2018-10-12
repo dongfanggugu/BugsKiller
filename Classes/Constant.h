@@ -11,27 +11,27 @@
 //非指针类型成员变量
 #define PropertyBuilderByName(type, name, access_permission)\
 access_permission:\
-type m##name;\
+type _##name;\
 public:\
-inline void setM##name(type name) {\
-m##name = name;\
+inline void set##name(type name) {\
+_##name = name;\
 }\
-inline type getM##name() {\
-return m##name;\
+inline type get##name() {\
+return _##name;\
 }\
 
 //指针型成员变量
 #define PointerPropertyBuilderByName(type, name, access_permission)\
 access_permission:\
-type* m##name;\
+type* _##name;\
 public:\
-inline void setM##name(type* name){\
-m##name = name;\
+inline void set##name(type* name){\
+_##name = name;\
 }\
-inline type* getM##name(){\
-return m##name;\
+inline type* get##name(){\
+return _##name;\
 }\
 
-#define WinSize Director::getInstance()->getWinSize()
+#define WinSize Director::getInstance()->getVisibleSize()
 
 #endif /* Constant_h */

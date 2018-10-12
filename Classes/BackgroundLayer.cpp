@@ -3,30 +3,39 @@
 
 USING_NS_CC;
 USING_NS_CC_EXT;
+using namespace std;
 
 #define DEF_ROLL_SPEED 8
 
 int BackgroundLayer::rollTime = DEF_ROLL_SPEED;
 
-#define winSize Director::getInstance()->getWinSize()
+BackgroundLayer* BackgroundLayer::create(const string &filename, float width, float height)
+{
+    BackgroundLayer *background = new BackgroundLayer();
+    if (background && background->init(filename, width, height))
+    {
+        background->autorelease();
+        return background;
+    }
+    CC_SAFE_DELETE(background);
+    return nullptr;
+}
 
-bool BackgroundLayer::init()
+bool BackgroundLayer::init(const string &filename, float width, float height)
 {
     if (!Layer::init())
     {
         return false;
     }
-    this->setContentSize(Size(winSize.width - 100, winSize.height));
-    this->setAnchorPoint(Vec2(0.5, 0.5));
-    this->addBackground();
+    this->setContentSize(Size(width, height));
+    this->addBackground(filename);
     return true;
 }
 
-void BackgroundLayer::addBackground()
+void BackgroundLayer::addBackground(const string &filename)
 {
-    auto background = Scale9Sprite::create("res/background.PNG");
-    background->setAnchorPoint(Vec2(0.5, 0.5));
-    background->setScale9Enabled(true);
+    auto background = Sprite::create(filename);
+//    background->setStretchEnabled(true);
     background->setContentSize(this->getContentSize());
     background->setPosition(Vec2::ZERO);
     this->addChild(background);
@@ -52,10 +61,5 @@ void BackgroundLayer::startRollbg()
 
 void BackgroundLayer::stop()
 {
-    this->stopAllActions();
-}
-
-BackgroundLayer::~BackgroundLayer()
-{
-    log("backgroundlayer dealloc");
+//    this->stopAllActions();
 }

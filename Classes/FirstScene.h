@@ -27,7 +27,7 @@ public:
     static cocos2d::Scene* createScene();
     virtual bool init();
     virtual void update(float delta);
-    virtual void onMove(float delta);
+    virtual void onMove(float delta, unsigned tag);
     CREATE_FUNC(FirstScene);
     virtual ~FirstScene();
     //b2ContactListener
@@ -80,7 +80,9 @@ private:
     //method
     void addBallBoard();
     void addOpLayer();
+    void addRotationLayer();
     void addBricks();
+    void rotationBoard(float angle);
     Brick* genBrick(int);
     cocos2d::Vec2 calBrickPos(int, cocos2d::Size);
     
@@ -89,6 +91,9 @@ private:
     void initWorld();
     void initGround();
     void removeBricks();
+    void setB2boxDebug();
+    
+    void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags);
 
 public:
     void setBallSpeed(float speed);

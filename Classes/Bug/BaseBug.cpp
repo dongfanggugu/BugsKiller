@@ -9,5 +9,4 @@
 
 void BaseBug::setBugPos(cocos2d::Vec2 pos)
 {
-    this->mBugSprite->setPosition(pos);
 }

@@ -12,7 +12,7 @@ using namespace std;
 Ball* Ball::create()
 {
     Ball *ball = new Ball();
-    if (ball && ball->initWithFile("res/button_fire.png"));
+    if (ball && ball->initWithFile("res/ball.png"));
     {
         ball->autorelease();
         return ball;

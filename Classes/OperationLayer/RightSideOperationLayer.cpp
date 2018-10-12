@@ -11,21 +11,44 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace std;
 
-bool RightSideOperationLayer::init()
+RightSideOperationLayer* RightSideOperationLayer::create(float width, float height)
+{
+    RightSideOperationLayer *layer = new RightSideOperationLayer();
+    if (layer && layer->init(width, height))
+    {
+        layer->autorelease();
+        return layer;
+    }
+    CC_SAFE_DELETE(layer);
+    return nullptr;
+}
+
+bool RightSideOperationLayer::init(float width, float height)
 {
     if (!LayerColor::initWithColor(Color4B::RED))
     {
         return false;
     }
+    setContentSize(Size(width, height));
     startPoint = Point::ZERO;
+    addBackground(width, height);
     addTouchListener();
     return true;
+}
+
+void RightSideOperationLayer::addBackground(float width, float height)
+{
+    auto sp = Sprite::create("res/op_roll.png");
+    sp->setStretchEnabled(true);
+    sp->setContentSize(Size(width, height));
+    sp->setPosition(width / 2, height / 2);
+    addChild(sp);
 }
 
 void RightSideOperationLayer::addTouchListener()
 {
     auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->setSwallowTouches(true);
+//    touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [&](Touch *touch, Event *event) {
         auto pos = touch->getLocation();
         auto target = static_cast<RightSideOperationLayer *>(event->getCurrentTarget());
@@ -56,7 +79,7 @@ void RightSideOperationLayer::addTouchListener()
         else
         {
             float deltaY = pos.y - startPoint.y;
-            moveProtocol->onMove(deltaY);
+            moveProtocol->onMove(deltaY, gettag());
             startPoint = pos;
         }
         return true;

@@ -12,11 +12,20 @@
 #include <cocos2d.h>
 #include <cocos-ext.h>
 #include "Box2D/Box2D.h"
+#include "Constant.h"
 
 class BallBoard : public cocos2d::extension::PhysicsSprite
 {
 public:
-    static BallBoard* create(b2World *world);
+    static BallBoard* create(b2World *world, float ptm, float width, float height);
+    
+private:
+    //property
+    PointerPropertyBuilderByName(b2World, world, private);
+    PropertyBuilderByName(float, width, private);
+    PropertyBuilderByName(float, height, private);
+    //method
+    void addB2Body();
 };
 
 #endif /* BallBoard_hpp */
