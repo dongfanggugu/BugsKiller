@@ -93,8 +93,6 @@ private:
     void removeBricks();
     void setB2boxDebug();
     
-    void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags);
-
 public:
     void setBallSpeed(float speed);
     void setBallAngle(float angle);

@@ -43,3 +43,8 @@ void BallBoard::addB2Body()
     body->CreateFixture(&fixtureDef);
     setB2Body(body);
 }
+
+BallBoard::~BallBoard()
+{
+    log("dealloc %s", typeid(this).name());
+}

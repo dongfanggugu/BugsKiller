@@ -21,3 +21,8 @@ Ball* Ball::create()
     CC_SAFE_DELETE(ball);
     return nullptr;
 }
+
+Ball::~Ball()
+{
+    log("dealloc %s", typeid(this).name());
+}

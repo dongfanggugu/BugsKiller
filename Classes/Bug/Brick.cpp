@@ -20,3 +20,8 @@ Brick* Brick::create()
     CC_SAFE_DELETE(brick);
     return nullptr;
 }
+
+Brick::~Brick()
+{
+    log("dealloc %s", typeid(this).name());
+}

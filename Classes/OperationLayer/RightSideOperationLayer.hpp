@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <cocos2d.h>
+#include "../Constant.h"
 
 class RightSideOpProtocol
 {
@@ -27,8 +28,10 @@ public:
 private:
     void addBackground(float width, float height);
     void addTouchListener();
+    void addKeyboardListener();
     cocos2d::Vec2 startPoint;
     PropertyBuilderByName(unsigned int, tag, private);
+    ~RightSideOperationLayer();
 };
 
 #endif /* RightSideOperationLayer_hpp */

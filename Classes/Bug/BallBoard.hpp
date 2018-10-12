@@ -26,6 +26,7 @@ private:
     PropertyBuilderByName(float, height, private);
     //method
     void addB2Body();
+    ~BallBoard();
 };
 
 #endif /* BallBoard_hpp */

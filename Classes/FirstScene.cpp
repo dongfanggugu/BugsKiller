@@ -11,7 +11,7 @@
 #include "OperationLayer/RightSideOperationLayer.hpp"
 #include "Constant.h"
 #include "Bug/BallBoard.hpp"
-#include "GLES-Render.h"
+//#include "GLES-Render.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -54,7 +54,7 @@ bool FirstScene::init()
     ballAngle = 60;
     scheduleUpdate();
 //    this->addBugsLayer();
-//    this->addCloseBtn();
+    this->addCloseBtn();
 //    this->addSprite();
 //    this->addRightBtn();
 //    this->addFireBtn();
@@ -241,38 +241,38 @@ Vec2 FirstScene::nextBallPositon(float timeDelta)
     return Vec2(cPos.x + x, cPos.y + y);
 }
 
-//Button* FirstScene::genBtn(const std::string &title,
-//                                        const std::string &icon,
-//                                        const cocos2d::ui::Button::ccWidgetClickCallback &callback)
-//{
-//    /*auto btn = cocos2d::ui::Button::create();
-//    if (title.length() > 0)
-//    {
-//        btn->setTitleText(title);
-//    }
-//    if (icon.length() > 0)
-//    {
-//        btn->loadTextureNormal(icon);
-//    }
-//    btn->addClickEventListener(callback);
-//    return btn;*/
-//}
+Button* FirstScene::genBtn(const std::string &title,
+                                        const std::string &icon,
+                                        const cocos2d::ui::Button::ccWidgetClickCallback &callback)
+{
+    auto btn = cocos2d::ui::Button::create();
+    if (title.length() > 0)
+    {
+        btn->setTitleText(title);
+    }
+    if (icon.length() > 0)
+    {
+        btn->loadTextureNormal(icon);
+    }
+    btn->addClickEventListener(callback);
+    return btn;
+}
 
 void close(Ref *sender)
 {
-   /* auto director = Director::getInstance();
-    director->end();
+    auto director = Director::getInstance();
+    director->popScene();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
-#endif*/
+#endif
 }
 
 void FirstScene::addCloseBtn()
 {
-    /*auto btn = this->genBtn("", "CloseNormal.png", &close);
+    auto btn = this->genBtn("", "CloseNormal.png", &close);
     btn->setContentSize(Size(30, 30));
-    btn->setPosition(Vec2(winSize.width - 15, winSize.height - 15));
-    this->addChild(btn);*/
+    btn->setPosition(Vec2(WinSize.width - 15, WinSize.height - 15));
+    this->addChild(btn);
 }
 
 void FirstScene::addSprite()
@@ -343,7 +343,7 @@ void FirstScene::addLeftOperationLayer()
 
 FirstScene::~FirstScene()
 {
-    log("dealloc");
+    log("dealloc %s", typeid(this).name());
 }
 
 float opRadio()
@@ -523,19 +523,19 @@ void FirstScene::EndContact(b2Contact *contact)
 
 void FirstScene::setB2boxDebug()
 {
-    auto debugDraw = new GLESDebugDraw(PTM_RADIO);
-    uint32 flags = 0;
-    flags += b2Draw::e_shapeBit;
-    flags += b2Draw::e_jointBit;
-    flags += b2Draw::e_centerOfMassBit;
-    debugDraw->SetFlags(flags);
-    mWorld->SetDebugDraw(debugDraw);
+    //auto debugDraw = new GLESDebugDraw(PTM_RADIO);
+    //uint32 flags = 0;
+    //flags += b2Draw::e_shapeBit;
+    //flags += b2Draw::e_jointBit;
+    //flags += b2Draw::e_centerOfMassBit;
+    //debugDraw->SetFlags(flags);
+    //mWorld->SetDebugDraw(debugDraw);
 }
 
-void FirstScene::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags)
-{
-    GL::enableVertexAttribs(cocos2d::GL::VERTEX_ATTRIB_FLAG_POSITION);
-    mWorld->DrawDebugData();
-    CHECK_GL_ERROR_DEBUG();
-}
+//void FirstScene::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags)
+//{
+//    GL::enableVertexAttribs(cocos2d::GL::VERTEX_ATTRIB_FLAG_POSITION);
+//    mWorld->DrawDebugData();
+//    CHECK_GL_ERROR_DEBUG();
+//}
 

@@ -17,6 +17,9 @@ class Brick : public cocos2d::extension::PhysicsSprite
 {
 public:
     static Brick* create();
+    
+private:
+    ~Brick();
 };
 
 #endif /* Brick_hpp */

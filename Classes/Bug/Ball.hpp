@@ -16,6 +16,7 @@ class Ball : public cocos2d::extension::PhysicsSprite
 {
 public:
     static Ball* create();
+    ~Ball();
 };
 
 #endif /* Ball_hpp */

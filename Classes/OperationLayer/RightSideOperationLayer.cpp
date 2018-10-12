@@ -33,6 +33,7 @@ bool RightSideOperationLayer::init(float width, float height)
     startPoint = Point::ZERO;
     addBackground(width, height);
     addTouchListener();
+    addKeyboardListener();
     return true;
 }
 
@@ -45,10 +46,33 @@ void RightSideOperationLayer::addBackground(float width, float height)
     addChild(sp);
 }
 
+void RightSideOperationLayer::addKeyboardListener()
+{
+    auto keyListener = EventListenerKeyboard::create();
+    keyListener->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event *event) {
+        if (!moveProtocol)
+        {
+            return;
+        }
+        switch (keyCode)
+        {
+        case EventKeyboard::KeyCode::KEY_A:
+            moveProtocol->onMove(-10, gettag());
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            moveProtocol->onMove(10, gettag());
+            break;
+        }
+        return;
+
+    };
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyListener, this);
+}
+
 void RightSideOperationLayer::addTouchListener()
 {
     auto touchListener = EventListenerTouchOneByOne::create();
-//    touchListener->setSwallowTouches(true);
+    //    touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [&](Touch *touch, Event *event) {
         auto pos = touch->getLocation();
         auto target = static_cast<RightSideOperationLayer *>(event->getCurrentTarget());
@@ -91,4 +115,9 @@ void RightSideOperationLayer::addTouchListener()
     };
     
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+}
+
+RightSideOperationLayer::~RightSideOperationLayer()
+{
+    log("dealloc %s", typeid(this).name());
 }
