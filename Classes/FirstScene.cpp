@@ -6,12 +6,8 @@
 //
 
 #include "FirstScene.h"
-#include "BackgroundLayer.h"
-//#include "MosquitomLayer.hpp"
-#include "OperationLayer/RightSideOperationLayer.hpp"
+#include "Layers/BackgroundLayer.h"
 #include "Constant.h"
-#include "Bug/BallBoard.hpp"
-//#include "GLES-Render.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;

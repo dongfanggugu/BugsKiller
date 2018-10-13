@@ -78,6 +78,8 @@
 		EBB9D18C216EEFE100B111F2 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D189216EEFE100B111F2 /* Ball.cpp */; };
 		EBB9D18F2170441C00B111F2 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D18E2170441C00B111F2 /* GLES-Render.cpp */; };
 		EBB9D1902170441C00B111F2 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D18E2170441C00B111F2 /* GLES-Render.cpp */; };
+		EBB9D19C2171F99A00B111F2 /* SettingsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D19A2171F99A00B111F2 /* SettingsLayer.cpp */; };
+		EBB9D19D2171F99A00B111F2 /* SettingsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB9D19A2171F99A00B111F2 /* SettingsLayer.cpp */; };
 		EBCC1855209DA4BF00FD14D6 /* BaseBug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */; };
 		EBD4F437209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */; };
 		EBD4F438209D55030048A85A /* LeftSideOperationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */; };
@@ -201,6 +203,8 @@
 		EBB9D18A216EEFE100B111F2 /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 		EBB9D18D2170441C00B111F2 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		EBB9D18E2170441C00B111F2 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
+		EBB9D19A2171F99A00B111F2 /* SettingsLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SettingsLayer.cpp; sourceTree = "<group>"; };
+		EBB9D19B2171F99A00B111F2 /* SettingsLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SettingsLayer.hpp; sourceTree = "<group>"; };
 		EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseBug.cpp; sourceTree = "<group>"; };
 		EBCC1854209DA4BF00FD14D6 /* BaseBug.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseBug.hpp; sourceTree = "<group>"; };
 		EBCC1856209DA68200FD14D6 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -353,17 +357,12 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EBB9D1992171F88200B111F2 /* Layers */,
 				EBB9D18E2170441C00B111F2 /* GLES-Render.cpp */,
 				EBB9D18D2170441C00B111F2 /* GLES-Render.h */,
-				EBCC1851209DA4AA00FD14D6 /* Bug */,
-				EBD4F433209D55010048A85A /* BackgroundLayer.cpp */,
-				EBD4F430209D54FE0048A85A /* BackgroundLayer.h */,
-				EBD4F42C209D54FC0048A85A /* Arrow */,
+				EBCC1851209DA4AA00FD14D6 /* Sprites */,
 				EBD4F432209D54FF0048A85A /* FirstScene.cpp */,
 				EBD4F422209D54F70048A85A /* FirstScene.h */,
-				EBD4F434209D55020048A85A /* MosquitomLayer.cpp */,
-				EBD4F426209D54F90048A85A /* MosquitomLayer.hpp */,
-				EBD4F429209D54FB0048A85A /* OperationLayer */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
@@ -421,9 +420,28 @@
 			path = ios;
 			sourceTree = SOURCE_ROOT;
 		};
-		EBCC1851209DA4AA00FD14D6 /* Bug */ = {
+		EBB9D1992171F88200B111F2 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */,
+				EBD4F42B209D54FB0048A85A /* LeftSideOperationLayer.hpp */,
+				EB3CFF3D216E05D7003AADD7 /* RightSideOperationLayer.cpp */,
+				EB3CFF3E216E05D7003AADD7 /* RightSideOperationLayer.hpp */,
+				EBD4F433209D55010048A85A /* BackgroundLayer.cpp */,
+				EBD4F430209D54FE0048A85A /* BackgroundLayer.h */,
+				EBD4F434209D55020048A85A /* MosquitomLayer.cpp */,
+				EBD4F426209D54F90048A85A /* MosquitomLayer.hpp */,
+				EBB9D19A2171F99A00B111F2 /* SettingsLayer.cpp */,
+				EBB9D19B2171F99A00B111F2 /* SettingsLayer.hpp */,
+			);
+			path = Layers;
+			sourceTree = "<group>";
+		};
+		EBCC1851209DA4AA00FD14D6 /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				EBD4F42D209D54FC0048A85A /* BaseArrow.cpp */,
+				EBD4F42E209D54FC0048A85A /* BaseArrow.hpp */,
 				EBCC1853209DA4BF00FD14D6 /* BaseBug.cpp */,
 				EBCC1854209DA4BF00FD14D6 /* BaseBug.hpp */,
 				EB3CFF38216DF032003AADD7 /* BallBoard.cpp */,
@@ -433,27 +451,7 @@
 				EBB9D189216EEFE100B111F2 /* Ball.cpp */,
 				EBB9D18A216EEFE100B111F2 /* Ball.hpp */,
 			);
-			path = Bug;
-			sourceTree = "<group>";
-		};
-		EBD4F429209D54FB0048A85A /* OperationLayer */ = {
-			isa = PBXGroup;
-			children = (
-				EBD4F42A209D54FB0048A85A /* LeftSideOperationLayer.cpp */,
-				EBD4F42B209D54FB0048A85A /* LeftSideOperationLayer.hpp */,
-				EB3CFF3D216E05D7003AADD7 /* RightSideOperationLayer.cpp */,
-				EB3CFF3E216E05D7003AADD7 /* RightSideOperationLayer.hpp */,
-			);
-			path = OperationLayer;
-			sourceTree = "<group>";
-		};
-		EBD4F42C209D54FC0048A85A /* Arrow */ = {
-			isa = PBXGroup;
-			children = (
-				EBD4F42D209D54FC0048A85A /* BaseArrow.cpp */,
-				EBD4F42E209D54FC0048A85A /* BaseArrow.hpp */,
-			);
-			path = Arrow;
+			path = Sprites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -615,6 +613,7 @@
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				EBD4F439209D55030048A85A /* BaseArrow.cpp in Sources */,
 				EB3CFF3F216E05D7003AADD7 /* RightSideOperationLayer.cpp in Sources */,
+				EBB9D19C2171F99A00B111F2 /* SettingsLayer.cpp in Sources */,
 				EBCC1855209DA4BF00FD14D6 /* BaseBug.cpp in Sources */,
 				EBD4F43F209D55030048A85A /* BackgroundLayer.cpp in Sources */,
 				EBB9D18F2170441C00B111F2 /* GLES-Render.cpp in Sources */,
@@ -642,6 +641,7 @@
 				EB3CFF40216E05D7003AADD7 /* RightSideOperationLayer.cpp in Sources */,
 				EBB9D186216EE5FF00B111F2 /* Brick.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				EBB9D19D2171F99A00B111F2 /* SettingsLayer.cpp in Sources */,
 				EBD4F43E209D55030048A85A /* FirstScene.cpp in Sources */,
 				EBD4F43A209D55030048A85A /* BaseArrow.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
