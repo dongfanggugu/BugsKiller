@@ -14,6 +14,7 @@
 #include "cocos/base/CCVector.h"
 #include "cocos-ext.h"
 #include "OperationLayer/RightSideOperationLayer.hpp"
+#include "OperationLayer/LeftSideOperationLayer.hpp"
 #include "MosquitomLayer.hpp"
 #include "Bug/Brick.hpp"
 #include "Bug/Ball.hpp"
@@ -21,13 +22,15 @@
 #include "Constant.h"
 #include "../cocos2d/cocos/base/CCVector.h"
 
-class FirstScene : public cocos2d::Scene, public RightSideOpProtocol, public b2ContactListener
+class FirstScene : public cocos2d::Scene, public RightSideOpProtocol, public b2ContactListener, public LeftSideMoveProtocol
 {
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
     virtual void update(float delta);
     virtual void onMove(float delta, unsigned tag);
+    void onTouch(unsigned tag);
+    void onMove(float delta);
     CREATE_FUNC(FirstScene);
     virtual ~FirstScene();
     //b2ContactListener

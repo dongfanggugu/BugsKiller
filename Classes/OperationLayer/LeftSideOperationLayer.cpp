@@ -10,15 +10,12 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-#define winSize Director::getInstance()->getWinSize()
-
 bool LeftSideOperationLayer::init()
 {
     if (!Layer::init())
     {
         return false;
     }
-    this->setContentSize(Size(200, winSize.height));
     this->addTouchListener();
     return true;
 }
@@ -29,17 +26,18 @@ void LeftSideOperationLayer::addTouchListener()
     touchListener->onTouchBegan = [&](Touch *touch, Event *event)
     {
         auto pos = touch->getLocation();
-        this->startPoint = pos;
-        log("begin");
         auto target = static_cast<LeftSideOperationLayer *>(event->getCurrentTarget());
-        if (target->getBoundingBox().containsPoint(pos))
-        { 
-            if (this->moveProtocol)
-            {
-                this->moveProtocol->onMove(pos.y);
-            }
+        if (!moveProtocol)
+        {
+            startPoint = Point::ZERO;
+            return true;
         }
-
+        if (!target->getBoundingBox().containsPoint(pos))
+        {
+            startPoint = Point::ZERO;
+            return true;
+        }
+        startPoint = pos;
         return true;
     };
 
@@ -47,20 +45,32 @@ void LeftSideOperationLayer::addTouchListener()
     {
         auto pos = touch->getLocation();
         auto target = static_cast<LeftSideOperationLayer *>(event->getCurrentTarget());
-        if (target->getBoundingBox().containsPoint(pos))
+        if (!moveProtocol)
         {
-            if (this->moveProtocol)
-            {
-                this->moveProtocol->onMove(pos.y);
-            }
-            log("x: %f, y: %f", pos.x, pos.y);
+            return true;
         }
+        
+        if (!target->getBoundingBox().containsPoint(pos))
+        {
+            startPoint = Point::ZERO;
+            return true;
+        }
+        if (startPoint.equals(Point::ZERO))
+        {
+            startPoint = pos;
+        }
+        else
+        {
+            float delta = pos.x - startPoint.x;
+            moveProtocol->onMove(delta);
+            startPoint = pos;
+        }
+        return true;
     };
 
-    touchListener->onTouchEnded = [](Touch *touch, Event *event)
+    touchListener->onTouchEnded = [&](Touch *touch, Event *event)
     {
-        auto pos = touch->getLocation();
-        log("end");
+        startPoint = Point::ZERO;
     };
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 }

@@ -48,6 +48,7 @@ bool FirstScene::init()
     addBallBoard();
     addOpLayer();
     addRotationLayer();
+    addLeftOperationLayer();
     addBricks();
     addBall();
     ballSpeed = 10;
@@ -76,7 +77,7 @@ void FirstScene::addOpLayer()
 {
     auto layer = RightSideOperationLayer::create(40, WinSize.height / 2);
     layer->settag(1);
-    layer->moveProtocol = this;
+    layer->setmoveProtocol(this);
     layer->setPosition(Vec2(10, 50));
     this->addChild(layer);
 }
@@ -85,7 +86,7 @@ void FirstScene::addRotationLayer()
 {
     auto layer = RightSideOperationLayer::create(40, WinSize.height / 2);
     layer->settag(2);
-    layer->moveProtocol = this;
+    layer->setmoveProtocol(this);
     layer->setPosition(Vec2(WinSize.width - 10 - 40, 50));
     this->addChild(layer);
 }
@@ -246,6 +247,7 @@ Button* FirstScene::genBtn(const std::string &title,
                                         const cocos2d::ui::Button::ccWidgetClickCallback &callback)
 {
     auto btn = cocos2d::ui::Button::create();
+    btn->setScale9Enabled(true);
     if (title.length() > 0)
     {
         btn->setTitleText(title);
@@ -262,16 +264,16 @@ void close(Ref *sender)
 {
     auto director = Director::getInstance();
     director->popScene();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//    exit(0);
+//#endif
 }
 
 void FirstScene::addCloseBtn()
 {
-    auto btn = this->genBtn("", "CloseNormal.png", &close);
-    btn->setContentSize(Size(30, 30));
-    btn->setPosition(Vec2(WinSize.width - 15, WinSize.height - 15));
+    auto btn = this->genBtn("", "res/back.png", &close);
+    btn->setContentSize(Size(45, 45));
+    btn->setPosition(Vec2(35, WinSize.height - 35));
     this->addChild(btn);
 }
 
@@ -336,9 +338,22 @@ void FirstScene::checkCollison()
 
 void FirstScene::addLeftOperationLayer()
 {
-//    auto layer = LeftSideOperationLayer::create();
-//    layer->moveProtocol = this;
-//    this->addChild(layer);
+    auto layer = LeftSideOperationLayer::create();
+    layer->moveProtocol = this;
+    layer->setContentSize(WinSize);
+    this->addChild(layer);
+}
+
+void FirstScene::onMove(float delta)
+{
+//    mBoard->setRotation(0);
+    auto pos = mBoard->getPosition();
+    auto size = mBoard->getContentSize();
+    float x = pos.x + delta;
+    x = MIN(x, WinSize.width - size.width / 2);
+    x = MAX(x, size.width / 2);
+    auto newPos = Vec2(x, pos.y);
+    mBoard->setPosition(newPos);
 }
 
 FirstScene::~FirstScene()
@@ -351,31 +366,33 @@ float opRadio()
     return (WinSize.width - BgMargin) / (WinSize.height / 2);
 }
 
+void FirstScene::onTouch(unsigned tag)
+{
+   if (1 == tag)
+   {
+       //left
+       rotationBoard(15);
+   }
+   else if (2 == tag)
+   {
+       //right
+       rotationBoard(-15);
+   }
+}
+
 void FirstScene::onMove(float delta, unsigned tag)
 {
-    if (1 == tag)
-    {
-        mBoard->setRotation(0);
-        auto pos = mBoard->getPosition();
-        auto size = mBoard->getContentSize();
-        float x = pos.x + delta * opRadio();
-        x = MIN(x, WinSize.width - size.width / 2);
-        x = MAX(x, size.width / 2);
-        auto newPos = Vec2(x, pos.y);
-        mBoard->setPosition(newPos);
-    }
-    else if (2 == tag)
-    {
-        rotationBoard(delta);
-    }
+    
 }
 
 void FirstScene::rotationBoard(float angle)
 {
     float curAngle = mBoard->getRotation();
     float newAngle = curAngle + angle;
-    newAngle = MIN(newAngle, 30);
-    newAngle = MAX(newAngle, -30);
+    if (curAngle != 0)
+    {
+        newAngle = 0;
+    }
     mBoard->setRotation(newAngle);
 }
 

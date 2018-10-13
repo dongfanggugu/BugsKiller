@@ -50,17 +50,17 @@ void RightSideOperationLayer::addKeyboardListener()
 {
     auto keyListener = EventListenerKeyboard::create();
     keyListener->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event *event) {
-        if (!moveProtocol)
+        if (!_moveProtocol)
         {
             return;
         }
         switch (keyCode)
         {
         case EventKeyboard::KeyCode::KEY_A:
-            moveProtocol->onMove(-10, gettag());
+            _moveProtocol->onMove(-10, gettag());
             break;
         case EventKeyboard::KeyCode::KEY_D:
-            moveProtocol->onMove(10, gettag());
+            _moveProtocol->onMove(10, gettag());
             break;
         }
         return;
@@ -72,14 +72,16 @@ void RightSideOperationLayer::addKeyboardListener()
 void RightSideOperationLayer::addTouchListener()
 {
     auto touchListener = EventListenerTouchOneByOne::create();
-    //    touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [&](Touch *touch, Event *event) {
         auto pos = touch->getLocation();
         auto target = static_cast<RightSideOperationLayer *>(event->getCurrentTarget());
-        log("%s", typeid(target).name());
         if (target->getBoundingBox().containsPoint(pos))
         {
             startPoint = pos;
+            if  (_moveProtocol)
+            {
+                _moveProtocol->onTouch(gettag());
+            }
         }
         return true;
     };
@@ -92,7 +94,7 @@ void RightSideOperationLayer::addTouchListener()
             startPoint = Point::ZERO;
             return true;
         }
-        if (!moveProtocol)
+        if (!_moveProtocol)
         {
             return true;
         }
@@ -103,7 +105,7 @@ void RightSideOperationLayer::addTouchListener()
         else
         {
             float deltaY = pos.y - startPoint.y;
-            moveProtocol->onMove(deltaY, gettag());
+            _moveProtocol->onMove(deltaY, gettag());
             startPoint = pos;
         }
         return true;
