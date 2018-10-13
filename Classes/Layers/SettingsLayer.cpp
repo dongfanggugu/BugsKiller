@@ -6,3 +6,17 @@
 //
 
 #include "SettingsLayer.hpp"
+USING_NS_CC;
+USING_NS_CC_EXT;
+using namespace std;
+
+bool SettingsLayer::init()
+{
+    if (!LayerColor::init())
+    {
+        return false;
+    }
+    
+    
+}
+
