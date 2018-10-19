@@ -16,6 +16,7 @@
 #include "Layers/RightSideOperationLayer.hpp"
 #include "Layers/LeftSideOperationLayer.hpp"
 #include "Layers/MosquitomLayer.hpp"
+#include "Layers/SettingsLayer.hpp"
 #include "Sprites/Brick.hpp"
 #include "Sprites/Ball.hpp"
 #include "Sprites/BallBoard.hpp"
@@ -50,6 +51,8 @@ private:
     void move1(Ref *sender);
     void loadPackageImage();
     void addCloseBtn();
+    void addSettingsBtn();
+    void addSettingsLayer();
     void addLeftBtn();
     void addRightBtn();
     void addFireBtn();
@@ -79,6 +82,7 @@ private:
     float ballAngle;
     b2World *mWorld;
     cocos2d::Vector<Brick *> mVector;
+    PointerPropertyBuilderByName(SettingsLayer, settingsLayer, private);
 
     //method
     void addBallBoard();
@@ -95,6 +99,7 @@ private:
     void initGround();
     void removeBricks();
     void setB2boxDebug();
+    void settingsSwitch(cocos2d::Ref *sender);
     
 public:
     void setBallSpeed(float speed);

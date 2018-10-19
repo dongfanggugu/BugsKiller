@@ -12,11 +12,11 @@ using namespace std;
 
 bool SettingsLayer::init()
 {
-    if (!LayerColor::init())
+    if (!LayerColor::initWithColor(Color4B::BLUE))
     {
         return false;
     }
     
-    
+    return true;
 }
 

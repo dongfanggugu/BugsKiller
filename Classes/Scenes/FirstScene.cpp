@@ -8,10 +8,12 @@
 #include "FirstScene.h"
 #include "Layers/BackgroundLayer.h"
 #include "Constant.h"
+#include "Layers/SettingsLayer.hpp"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace cocos2d::ui;
+using namespace std;
 
 #define ArrowInitY 40
 #define BgMargin 100
@@ -47,11 +49,13 @@ bool FirstScene::init()
     addLeftOperationLayer();
     addBricks();
     addBall();
+    addSettingsBtn();
+    addSettingsLayer();
     ballSpeed = 10;
     ballAngle = 60;
     scheduleUpdate();
 //    this->addBugsLayer();
-    this->addCloseBtn();
+    addCloseBtn();
 //    this->addSprite();
 //    this->addRightBtn();
 //    this->addFireBtn();
@@ -267,9 +271,9 @@ void close(Ref *sender)
 
 void FirstScene::addCloseBtn()
 {
-    auto btn = this->genBtn("", "res/back.png", &close);
+    auto btn = this->genBtn("Back", "", &close);
     btn->setContentSize(Size(45, 45));
-    btn->setPosition(Vec2(35, WinSize.height - 35));
+    btn->setPosition(Vec2(25, WinSize.height - 25));
     this->addChild(btn);
 }
 
@@ -552,3 +556,33 @@ void FirstScene::setB2boxDebug()
 //    CHECK_GL_ERROR_DEBUG();
 //}
 
+#pragma mark - add buttons
+
+void FirstScene::addSettingsBtn()
+{
+//    auto btn = genBtn("Settings", "", CC_CALLBACK_1(FirstScene::settingsSwitch, this));
+    auto btn = genBtn("Settings", "", std::bind(&FirstScene::settingsSwitch, this, placeholders::_1));
+    btn->setContentSize(Size(40, 40));
+    btn->setPosition(Point(WinSize.width - 20, WinSize.height - 25));
+    addChild(btn);
+}
+
+void  FirstScene::addSettingsLayer()
+{
+    _settingsLayer = SettingsLayer::create();
+    _settingsLayer->setContentSize(Size::ZERO);
+    addChild(_settingsLayer);
+}
+
+void FirstScene::settingsSwitch(Ref *sender)
+{
+    Size size = _settingsLayer->getContentSize();
+    if (size.equals(Size::ZERO))
+    {
+        _settingsLayer->setContentSize(WinSize);
+    }
+    else
+    {
+        _settingsLayer->setContentSize(Size::ZERO);
+    }
+}

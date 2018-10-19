@@ -357,17 +357,14 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EB0AB42621743F6900067D62 /* Utils */,
+				EB0AB42021743F2400067D62 /* Scenes */,
 				EBB9D1992171F88200B111F2 /* Layers */,
 				EBB9D18E2170441C00B111F2 /* GLES-Render.cpp */,
 				EBB9D18D2170441C00B111F2 /* GLES-Render.h */,
 				EBCC1851209DA4AA00FD14D6 /* Sprites */,
-				EBD4F432209D54FF0048A85A /* FirstScene.cpp */,
-				EBD4F422209D54F70048A85A /* FirstScene.h */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
-				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
-				EBCC1856209DA68200FD14D6 /* Constant.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -419,6 +416,25 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		EB0AB42021743F2400067D62 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				EBD4F432209D54FF0048A85A /* FirstScene.cpp */,
+				EBD4F422209D54F70048A85A /* FirstScene.h */,
+				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
+				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		EB0AB42621743F6900067D62 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EBCC1856209DA68200FD14D6 /* Constant.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
 		};
 		EBB9D1992171F88200B111F2 /* Layers */ = {
 			isa = PBXGroup;
